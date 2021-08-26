@@ -26,7 +26,7 @@
 %\usepackage{minted}
 \author{Mauro Werder}
 \date{\today}
-\title{ETH glaciology field-course 2019:\\ glacier hydrology}
+\title{ETH glaciology field-course \the\year{}:\\ glacier hydrology}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={ETH glaciology field-course}
@@ -90,9 +90,9 @@ Pack-list:\\
   \item several copies of these instructions
   \item USB stick
   \item tape and string
-  \item hand-held GPS
+  \item hand-held GPS / smart phone which displays coordinates
   \item 20--30m rope and 2 screw carabiners
-  \item Camera
+  \item Camera / smart phone
   \item two or three radios (walky-talky)
   \item Dell field-laptop (vawnb24).
   \end{itemize}
@@ -113,8 +113,8 @@ Pack-list:\\
   \end{itemize}
 \item Stage of lake and streams
   \begin{itemize}
-  \item 1x Keller DC-22SG datalogger with fresh batteries \& serial cable
-  \item 2x Keller DCX-22 (same cable as for DCX-22 CTD)
+  \item 2x Keller DCX-22 pressure sensor (same cable as for DCX-22 CTD)
+  \item 1x Keller DCX-22AA dual pressure sensor (water \& air) (same cable as for DCX-22 CTD)
   \item cord (15m)
   \item weight
   \item protective casing to reduce risk of fine sediment clogging sensor
@@ -154,12 +154,12 @@ The aim is to produce a 1g/l and a 10g/l calibration solution here at the VAW
   ``Analyseraum'' at VAW)
 \item take 1l of distilled water (should have about 3\,$\mu$S/cm),
   make sure to rinse the container first with distilled water
-\item dissolve it in the 1l (should have about 17$\times$10$^3\,\mu$
-  S/cm), put 100ml in a rinsed, glass sampling bottles $\rightarrow$
-  10g/l solution
+\item dissolve it in the 1l, put 100ml in a rinsed, glass sampling bottles $\rightarrow$
+  10g/l solution (should read about 17$\times$10$^3\,\mu$
+  S/cm)
 \item take 10ml of the 10g/l solution and add it to 90ml distilled
   water (in one of those sampling bottles).  $\rightarrow$ 1g/l
-  solution.
+  solution.  (should read about 1900$\times$10$^3\,\mu$ on the WTW)
 \end{itemize}
 
 \subsubsection{Test Calibration}
@@ -186,32 +186,29 @@ Measure out zip-lock bags of 10x 10g, 10x 20g, 5x 50g, and 10x 1kg.
 We'll employ a series of pressure transducers to record: lake-level,
 stream-level and, maybe, air-pressure.
 
-Settings:
-\begin{itemize}
-\item
-\end{itemize}
-
-\textbf{DC-22} can only be configured with Frostly, the old Tough-Book
-running Windows XP.
-\begin{itemize}
-  \item check/set time and date of computer (to an accuracy 1 minute)
-\item Open ``Logger 3.1''
-\item Click button with ``C'' and right arrow
-\item Modify settings to
-\begin{itemize}
-\item Storage rate: 1 minute
-\item Channels to be recorded: ``p1'', ``t1''
-\item Start mode: ``at write configuration''
-\item Check tick-box ``synchronize device clock with PC clock''
-\item Amount: ``complete memory''
-\end{itemize}
-\item write to device: click button ``C'' with left arrow.  Click
-  ``ok''/``ja'' for warnings.
-  \item unplug sensor, add cap, and shutdown computer
-\end{itemize}
+% \textbf{DC-22} can only be configured with Frostly, the old Tough-Book
+% running Windows XP.
+% \begin{itemize}
+%   \item check/set time and date of computer (to an accuracy 1 minute)
+% \item Open ``Logger 3.1''
+% \item Click button with ``C'' and right arrow
+% \item Modify settings to
+% \begin{itemize}
+% \item Storage rate: 1 minute
+% \item Channels to be recorded: ``p1'', ``t1''
+% \item Start mode: ``at write configuration''
+% \item Check tick-box ``synchronize device clock with PC clock''
+% \item Amount: ``complete memory''
+% \end{itemize}
+% \item write to device: click button ``C'' with left arrow.  Click
+%   ``ok''/``ja'' for warnings.
+%   \item unplug sensor, add cap, and shutdown computer
+% \end{itemize}
 
 \textbf{DCX-22} (pressure only) and \textbf{DCX-22 CTD} (with
-conductivity).  Configuration and download is with the field-laptop:
+conductivity).  Configuration and download is with the field-laptop.
+
+
 \begin{itemize}
   \item check/set time and date of computer (to an accuracy 1
     \emph{second}, as for the flow speed measurements with the CTD we
@@ -220,7 +217,7 @@ conductivity).  Configuration and download is with the field-laptop:
     program, sometimes it is rather slow.
   \item plug in cable K-104A \& sensor to that cable
   \item press ``F2'' (scan ports) and after waiting a bit click ``Programming''
-\item For \emph{pressure-only (DXC-22)} modify settings to
+\item For \emph{\bf pressure-only (DXC-22)} modify settings to
   \begin{itemize}
   \item Device memory: ``Linear''
   \item Device clock: check box ``Adjust device clock...''
@@ -230,17 +227,28 @@ conductivity).  Configuration and download is with the field-laptop:
 \item Click ``Write configuration'' (click through warnings), wait
   some time until it says ``Record active'' at the bottom
 \end{itemize}
-
-\item For \emph{conductivity (DXC-22 CTD)} modify settings to
+\item For \emph{\bf dual pressure-sensor (DXC-22aa CTD)} modify settings to
+  \begin{itemize}
+  \item Device memory: ``Linear''
+  \item Device clock: check box ``Adjust device clock...''
+    \item Start record: ``Immediatly when writing configuration''
+\item Measure interval: 30 Sec (should give approx 8 days recording time)
+\item Channels: ``P1'', ``P2'', ``TOB1'', ``TOB2''
+\item Click ``Write configuration'' (click through warnings), wait
+  some time until it says ``Record active'' at the bottom
+\end{itemize}
+\item For \emph{\bf conductivity (DXC-22 CTD)} modify settings to
   \begin{itemize}
   \item Device memory: ``Linear''
   \item Device clock: check box ``Adjust device clock...''
   \item Start record: ``Certain time and date''
-    Time: 8:00, date: the next day
+    Time: 8:30, date: the next day
 \item Measure interval: 1 \textbf{second} (gives about 10.5h recording
   with 3 channels)
 \item Channels: ``P1'', ``TOB1'', ``ConRaw''
-  \item Check: ``Measuring range'' is 0...2000$\mu$S/cm
+  \item Check: ``Measuring range'' is 0...200$\mu$S/cm (the
+    0...2000$\mu$S/cm shows a non-linear response and is thus hard to
+    calibrate/use)
 \item Click ``Write configuration'' (click through warnings), wait
   some time until progress-bar is done and it says ``Record prepared'' at the bottom
 \end{itemize}
@@ -285,10 +293,14 @@ from a stable platform, and do the conductivity measurement at least
 5m upstream from the moulin.  Also, do not venture into areas of
 rock-fall danger.
 
+% TODO: add map
+
 The injection site should be at least 20 stream-widths above the
-measurement site, more if the mixing is poor; probably around 10-20m
+measurement site, more if the mixing is poor; probably around 20m
 will be good.  This is to ensure that the tracer is fully mixed by the
-time it passes the sensor.
+time it passes the sensor.  Also this will draw out the tracer cloud
+over several 10s of seconds which is good as we're logging at a 1
+second interval.
 
 \subsubsection{Supraglacial stage measurements}
 
@@ -303,6 +315,12 @@ Record: time, width, depth
 \textbf{Automatic:}\\
 At the supraglacial stream which you will do most salt dilation
 experiments, install an automatic stage measurement station.
+
+For this place a pressure sensor into a pool of water.  As the stream
+is probably small, make a pool with the big ice pick.  Place the
+DXC-22aa sensor into it, secure it to a pole (get the group
+with the drill you a hole).
+
 
 % This
 % uses a ``Sonic Ranger'' to measure the distance from the sensor to the
@@ -324,11 +342,6 @@ experiments, install an automatic stage measurement station.
 % after you have downloaded the data.  This is to guard against data loss
 % in case the internal logger battery is dead.
 
-For this place a pressure sensor into a pool of water.  As the stream
-is probably small, make a pool with the big ice pick.  Place a 0..10m
-H2O sensor into it, secure it with string to a pole (get the group
-with the drill you a hole) or use a big-ish rock as attachment point.
-
 \subsubsection{Water flow speed measurements and hydraulic roughness}
 
 The elevation difference is what drives the flow in a channel, and the
@@ -339,15 +352,22 @@ acceleration, and $f$ a friction factor.  We want to get $f$, so we
 need the rest:
 
 \begin{itemize}
-\item The time between salt injection and detection of the peak can be measured,
-divided by the flow path length gives the flow speed $v$.
+\item The time between detection of the salt peak at two different stations
+  divided by the flow path length gives the flow speed $v$.
 \item Flow speed divided by the discharge gives a mean cross sectional
-area $A$.  The measured width and depth give an indication of the wetted
+  area $A$.
+\item The measured width and depth give an indication of the wetted
 perimeter P.  The hyd. diameter is then $D = 4A/P$.
 \item The elevation difference $\Delta h$ comes from RTK GPS measurements: measure both
-the injection and detection point.  As the accuracy is about 10\,cm,
+detection points.  As the accuracy is about 10\,cm,
 make sure that you get enough elevation difference to get a good
-signal to noise ratio.
+signal to noise ratio.  (For this you need to talk to one of the two
+groups with the RTK GPS).
+\item if you have enough time the RTK GPS, then you can measure the
+  flow path length more accurately with the RTK by making a track
+  along all the channel's bends (i.e. you get the sinuosity then).
+\item take photographs covering the whole length of the test section,
+  to later gauge its morphology (sinuosity, step-pools, etc).
 \end{itemize}
 
 % If the cross
@@ -358,14 +378,14 @@ signal to noise ratio.
 % Or vice-versa, the mean flow cross sectional area can be determined
 % from the flow speed and a separate discharge measurement.
 
+Measure: salt concentration at two locations, stream length (with
+RTK), stream elevation difference (do this with the RTK), mean stream
+width, mean stream depth (with yardstick)
+
+Note your salt injections in your field-book in table like given in the next section.
 
 
-Measure: injection time (note that this needs to be to the second, on a
-watch synchronised with the conductivity loggers), stream length (with
-tape measure or RTK), stream elevation difference (do this with the
-RTK), mean stream width, mean stream depth (with yardstick)
-
-\subsubsection{Steps for salt dilution experiment}
+\subsubsection{Steps for salt dilution experiment on glacier}
 \label{sec-2-2}
 
 At injection site:
@@ -374,58 +394,57 @@ At injection site:
 practice).  Probably in the range 10g to 100g.
 \item prepare injection solution in the 1l measuring beaker
  \item take photograph of stream
-\item wait for ready signal from measurement crew and inject the salt
-\textbf{slowly} over approx \textasciitilde{}10s.  (The drawn-out injection is needed
-because the shortest logging interval is 1 second.  This makes sure
-that we get a good sampling of the breakthrough curve.)
+\item wait for ready signal from concentration measurement crew(s) and
+  inject the salt
+\item inject the salt in one go
 \end{enumerate}
 
 At measurement site:
 \begin{enumerate}
 \item if discharge is too low to fully submerge the sensor, make a
 depression with the ice axe.
-\item place WTW sensor in stream (the sensor is fully waterproof),
+\item place WTW sensor in stream (the sensor itself is fully waterproof),
   ideally with the sensor located in the central part of the stream
 \item place Keller CTD sensor close-by
 \item let the sensor temperature stabilise ($\sim$2min)
 \item write down the background conductivity of the WTW
-\item set the WTW datalogger:
-\begin{itemize}
-\item long press on ``STO''
-\item make sure sampling interval is 1s
-\item select long enough logging time, maybe 3min
-\item hit ``continue'' to start the logging
-\end{itemize}
+% \item set the WTW datalogger:
+% \begin{itemize}
+% \item long press on ``STO''
+% \item make sure sampling interval is 1s
+% \item select long enough logging time, maybe 3min
+% \item hit ``continue'' to start the logging
+% \end{itemize}
 \item signal to others to initiate injection
 \item check the sensor readout during the tracer passage.  Make sure
   that:
 \begin{itemize}
-\item maximum concentration does not go $\sim$2x above maximal
-  calibrated concentration (if not repeat with less salt)
-\item that concentration rises by at least 5--10$\mathrm{\mu S/cm}$ to get
+\item maximum concentration does not go above 200$\mathrm{\mu S/cm}$
+  (if it does, repeat with less salt)
+\item that concentration rises by at least 10$\mathrm{\mu S/cm}$ to get
   a good signal to noise ratio (if not repeat with more salt)
 \item the time interval is more than 15 seconds during which the
-  signal is at least 10$\mathrm{\mu S/cm}$ above background (if not
-  repeat but inject salt more slowly or further up in the stream.
-  This may necessitate a larger quantity.)
+  signal is at least 5$\mathrm{\mu S/cm}$ above background (if not
+  repeat but inject salt further up in the stream.  This may
+  necessitate a larger quantity.)
 \end{itemize}
-\item check that the data has been logged: long-press ``RCL'' \& check
-  that counter increased by 60 per minuted logged. (Alternatively go
-  back with the arrow keys to check for current logging entries).
-  \textbf{In several instances we mysteriously lost data of some
-    traces, so please do this check after each trace.}
+% \item check that the data has been logged: long-press ``RCL'' \& check
+%   that counter increased by 60 per minuted logged. (Alternatively go
+%   back with the arrow keys to check for current logging entries).
+%   \textbf{In several instances we mysteriously lost data of some
+%     traces, so please do this check after each trace.}
 \end{enumerate}
 
 
 Write into field-book:
-
-\begin{enumerate}
-\item visually estimated discharge (can also be on a 0-10 scale)
-\item time of injection
-\item amount of salt injected
-\item background conductivity
-\item approximate duration of injection (in seconds)
-\end{enumerate}
+\begin{center}
+\begin{tabular}{llll}
+Time & amount injected & upper CTD sensor \# & lower CTD sensor \#\\
+\hline
+HH:MM:SS & 50g  & 47586 & 38830\\
+etc...\
+\end{tabular}
+\end{center}
 
 \subsection{Steps for sensor calibration}
 \label{sec-2-3}
@@ -435,12 +454,14 @@ calibrated for the range of conductivity measured.
 
 Steps:
 \begin{enumerate}
-\item fill 1l measuring beaker with water from the stream
-\item place sensors in the beaker and let their temperatures equilibrate
+\item place sensors in ice water and let their temperatures
+  equilibrate for a few minutes
+\item rinse and fill 1l measuring beaker with water from the stream (probably
+  transfer it to the slightly bigger bucket)
 \item for WTW take zero reading and write in a table as below
-\item for Keller: take note of the time, use about 30s at each
+\item for Keller: take note of the time, use about 15s at each
   concentration level
-\item add a specific amount of the 10g/l calibration solution (using
+\item add a specific amount of the 1g/l or 10g/l calibration solution (using
   the totals suggested below, or other quantities if measurements
   demand).
 \item take reading
@@ -453,16 +474,35 @@ calibration.  The WTW sensor is temperature corrected but it is still
 better to do the calibration at the stream temperature.
 
 \begin{center}
-\begin{tabular}{ll}
-total ml added of 10g/l solution & readout ($\mathrm{\mu S/cm}$)\\
+\begin{tabular}{lll}
+Time & total ml added of {\bf 1g/l}  & WTW readout ($\mathrm{\mu S/cm}$)\\
 \hline
-0  & ... \\
-1 & ...\\
-3 & ... \\
-5 & ... \\
-10 & ... \\
+HH:MM:SS &0  & ... \\ % 1.5uS/cm
+&1 & ...\\   % 3.9uS/cm
+&2 & ...\\   %
+&5 & ... \\  % 12uS/cm
+&10 & ... \\ % 22uS/cm
 \end{tabular}
 \end{center}
+
+Rise beaker and get fresh water:
+
+\begin{center}
+\begin{tabular}{lll}
+Time & total ml added of {\bf 10g/l}  & WTW readout ($\mathrm{\mu S/cm}$)\\
+\hline
+HH:MM:SS &0  & ... \\ % 1.5uS/cm
+&2 & ...\\  % 44uS/cm
+&4 & ... \\ % 87uS/cm
+&9 & ... \\ % 188uS/cm
+&13 & ... \\ % 270uS/cm
+\end{tabular}
+\end{center}
+
+Note: 1ml of the 10g/l should give a change of $\sim$20$\mathrm{\mu S/cm}$.
+
+Depending on your typical recorded concentrations, you may not do the
+full calibration each time (but do the full one at least once).
 
 \subsubsection{Proglacial stream gauging}
 
@@ -470,7 +510,7 @@ If you do a gauging of the proglacial stream at the lake outlet or at
 Gletsch, do a separate calibration using the stream water.  The
 discharge of the stream at Gletsch can be checked on the BAFU web-site
 \url{https://www.hydrodaten.admin.ch/de/2268.html}, and should be in
-the range of 1 to 20m$^3$/s; select about 200g of salt per m$^3$/s
+the range of 1 to 20m$^3$/s; select at least 300g of salt per m$^3$/s
 discharge.  Use a big bucket to dissolve the salt.  Here you need the
 radios for communications.
 
@@ -486,7 +526,7 @@ was poor.
 \subsubsection{Proglacial lake level measurements}
 
 Use the autonomous Keller pressure transducers to measure the lake
-level (and one to measure air pressure), type DC-22SG (0.8-1.8bar).
+level (and one to measure air pressure), type DC-22SG (0.8-1.8bar, or other).
 %
 See section~\ref{s:press-trans} on detail of setting the transducer up.
 Place the transducer in a strategic place.
@@ -500,31 +540,30 @@ years measurements.
 \label{sec-evening}
 Overview:
 \begin{itemize}
-\item Charge radios (do that right away so you can swap to the second
-  before going to bed).
-\item Download the data from the WTW conductivity-datalogger onto a
-  USB-stick (instructions below).  (I'm not sure how much memory it
-  has, so better download it.)
+\item Charge radios
+% \item Download the data from the WTW conductivity-datalogger onto a
+%   USB-stick (instructions below).  (I'm not sure how much memory it
+%   has, so better download it.)
 \item Charge WTW datalogger.
 \item Download the data from the Keller DCX22 CTD (this takes long,
-    about 20min!) \& re-program for the next day.
-\item Check data visually using the Jupyter notebook provided.
+    at least 20min per sensor!) \& re-program for the next day.
+\item Check data visually using the Jupyter notebook provided (see below)
 \item Make sure there is enough pre-measured \& bagged salt available
   for the next day; otherwise make more.
 \item Take it easy.
 \end{itemize}
 
-Download WTW:
-\begin{itemize}
-\item switch datalogger on
-\item insert USB-stick
-\item long press ``Menu/Enter''
-\item got to ``Data storage''
-\item got to ``Automatic data storage''
-\item got to ``Output to USB''
-\item once finished it will return to the previous screen, remove USB
-  stick.
-\end{itemize}
+% Download WTW:
+% \begin{itemize}
+% \item switch datalogger on
+% \item insert USB-stick
+% \item long press ``Menu/Enter''
+% \item got to ``Data storage''
+% \item got to ``Automatic data storage''
+% \item got to ``Output to USB''
+% \item once finished it will return to the previous screen, remove USB
+%   stick.
+% \end{itemize}
 
 Download and re-program Keller DCX22 CTD:
 \begin{itemize}
@@ -544,17 +583,18 @@ Download and re-program Keller DCX22 CTD:
   \end{itemize}
 \item store data onto USB stick
 \item \textbf{re-program for the next day}, see Sec~\ref{s:cond-meters}; note
-  down the starting time in the fieldbook.
+  down the starting time (suggested 8:30) in the fieldbook.
 \end{itemize}
 
 \textbf{Important:} data backup.  Make sure that the data is
-stored in two other places than the logger.
+stored in at least two places
 \begin{itemize}
-\item copy WTW data onto field-laptop
-\item copy Keller-data onto USB-stick
+% \item copy WTW data onto field-laptop
+\item copy Keller-data from laptop onto USB-stick
 \item take photos of your field-book pages
 \end{itemize}
 
+% TODO
 Visual checking of data:
 \begin{itemize}
 \item start field-laptop in Linux (Ubuntu)
