@@ -3,6 +3,7 @@ name = "GlacierHydroFieldcourse"
 [deps]
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
 LsqFit = "2fda8390-95c7-5789-9bda-21331edee243"
 NBInclude = "0db19996-df87-5ea3-a455-e3a50d440464"
 PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
