@@ -1,0 +1,5 @@
+These notebooks are auto-generated from the julia-files in ../scripts via the
+the package Literate.jl.
+
+Go ahead and use and modify them for the fieldcourse.  But for permanent changes, implement
+them in ../scrips.

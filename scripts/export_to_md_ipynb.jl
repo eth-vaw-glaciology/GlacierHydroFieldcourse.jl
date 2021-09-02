@@ -1,12 +1,11 @@
 using Literate
 
 files = ["helper_functions.jl",
-         "1_intro.jl",
-         "2_calibration.jl",
-         "3_traces.jl",
-         "4_process_traces.jl",
-         "5_further_work.jl",
-         "run_them_all.jl",
+         # "1_intro.jl",
+         # "2_calibration.jl",
+         # "3_traces.jl",
+         # "4_process_traces.jl",
+         # "5_further_work.jl",
          "quick_data_visualisation.jl"
          ]
 
@@ -37,12 +36,18 @@ function include2nbinclude(str)
     return str
 end
 
-# for fl in files
-#     Literate.notebook(fl, outputdir="notebooks", preprocess=include2nbinclude)
-# end
 for fl in files
-    Literate.markdown(fl, outputdir="../docs", execute=true, flavor = Literate.FranklinFlavor() )
+    Literate.notebook(fl, preprocess=include2nbinclude)
 end
+for fl in readdir(".")
+    if splitext(fl)[2]==".ipynb"
+        mv(fl, "../notebooks/$fl")
+    end
+end
+
+# for fl in files
+#     Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
+# end
 
 # Literate.markdown("1_intro.jl", outputdir="../docs", execute=true, flavor = Literate.FranklinFlavor())
 # Literate.markdown("quick_data_visualisation.jl", outputdir="../docs", execute=false, flavor = Literate.FranklinFlavor() )

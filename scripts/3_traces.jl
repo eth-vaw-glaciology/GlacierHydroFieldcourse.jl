@@ -4,20 +4,15 @@
 # Read sensor time series and concatenate the time series into one for each sensor
 
 include("helper_functions.jl")
-include("calibration.jl")
+include("2_calibration.jl")
 
-fls = Dict(:s145=>["../../data/2021/day1/205145-10mH2O_25_08_2021-09_00_00.CSV",
-                   "../../data/2021/day2/205145-10mH2O_26_08_2021-08_30_00.CSV",
-                   "../../data/2021/day3/205145-10mH2O_27_08_2021-08_30_00.CSV",
-                   "../../data/2021/day4/205145-10mH2O_28_08_2021-08_30_00.CSV"],
-           :s309=>["../../data/2021/day1/205309-100mH2O_25_08_2021-09_00_00.CSV",
-                   "../../data/2021/day2/205309-100mH2O_26_08_2021-08_30_00.CSV",
-                   "../../data/2021/day3/205309-100mH2O_27_08_2021-08_30_00.CSV",
-                   "../../data/2021/day4/205309-100mH2O_28_08_2021-08_30_00.CSV"],
-           :s049=>["../../data/2021/day1/296049.CSV",
-                   "../../data/2021/day2/_26_08_2021-08_30_00.CSV",
-                   "../../data/2021/day3/_27_08_2021-08_30_00.CSV",
-                   "../../data/2021/day4/_28_08_2021-08_30_00.CSV"]
+## for each sensor list all data-files
+fls = Dict(:s145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
+                   "../data/raw/example/205145-10mH2O_26_08_2021-08_30_00.CSV"],
+           :s309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
+                   "../data/raw/example/205309-100mH2O_26_08_2021-08_30_00.CSV"],
+           ## :s049=>[],
+           ## :s999
            )
 
 sensor_readouts = Dict()
@@ -41,8 +36,10 @@ end
 legend(keys(sensor_readouts))
 ylabel("Conductivity (μS/cm)")
 
-# Read tracer metadata
-metafile = "../../data/2021/tracer_metadata.csv"
+# Read tracer metadata.  This CSV-file needs to have the format
+# `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
+# (add more sensors to the back if needed)
+metafile = "../data/raw/example/tracer_metadata.csv"
 d,h = readdlm(metafile, ',', header=true)
 
 # # Make the individual traces
@@ -67,8 +64,12 @@ for nr in 1:size(d,1)
     local sensor_name = Symbol.("s".*h[7:end])
     sensors = Dict()
     for snr=1:length(sensor_name)
+        sens = sensor_name[snr]
+        if !haskey(sensor_readouts, sens)
+            @warn("No data for sensor $sens")
+            continue
+        end
         if d[nr, snr+6]!="x"
-            sens = sensor_name[snr]
             loc = d[nr, snr+6]
             sensors[loc] = cut_sensor_readout(sensor_readouts[sens], tinj, tend)
             sensors[loc][:sensor_name] = sens

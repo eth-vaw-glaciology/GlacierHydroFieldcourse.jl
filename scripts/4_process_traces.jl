@@ -1,12 +1,16 @@
 # # Process traces
 #
-# Calculate
+# First runs scripts/notebooks `2_calibration` and `3_traces`.  Then
+# calculate:
 # - concentration
 # - discharge
 # - times of peaks
+# - background and peak concentrations
+#
+# Writes output to
 
-include("calibration.jl")
-include("traces.jl")
+include("2_calibration.jl")
+include("3_traces.jl")
 
 using Statistics
 

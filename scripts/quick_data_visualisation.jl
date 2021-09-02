@@ -21,14 +21,14 @@ Plots the results from one file.
 """
 function plotit(filename, sensor, variable=:cond)
     ## load
-    if sensor==:WTW
-        d = read_WTW(filename)
-    elseif sensor==:CTD
+    if sensor==:CTD
         d = read_Keller_DCX22_CTD(filename)
     elseif sensor==:DC22
         d = read_Keller_DC22(filename)
     elseif sensor==:DCX22
         d = read_Keller_DCX22(filename)
+    else
+        error("Don't know how to read data from sensor: $sensor")
     end
     ## plot
     figure()
@@ -37,6 +37,6 @@ function plotit(filename, sensor, variable=:cond)
 end
 
 # Call above function to do the plotting.  Examples:
-plotit("../data/example_raw/AD281106_example.CSV", :WTW, :cond)
 plotit("../data/example_raw/DC_22627.TXT", :DC22, :press)
+plotit("../data/example_raw/DC_22627.TXT", :DCX22, :press)
 plotit("../data/example_raw/205144-10mH2O_12_08_2019-08_00_00.CSV", :CTD, :press)
