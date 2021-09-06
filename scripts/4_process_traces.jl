@@ -7,10 +7,14 @@
 # - times of peaks
 # - background and peak concentrations
 #
-# Writes output to
+# Writes output to ../data/products/example/output.csv (change "example" to the current year)
 
+# Load "3_traces.jl" (also loads 2_calibration.jl and helper_functions.jl)
 include("3_traces.jl")
-pygui(false) # set to true to get interactive plots, false for in-line plots
+## set to true to get interactive plots, false for in-line plots
+pygui(false);
+
+# Make the processing-function (see their doc-string for more info)
 
 using Statistics
 
@@ -76,13 +80,18 @@ function process_trace!(tr)
         tr.products[loc][:peak_value] = peak_val
     end
     return nothing
+end;
+
+
+# Run the processing on all traces and plot a trace in terms of
+# concentration:
+
+for trace in traces
+    process_trace!(trace)
 end
-
-
-# Run the processing
-
-process_trace!.(traces)
-plot_trace(traces[1], :conc)
+plot_trace(traces[2], :conc)
+#md savefig("../docs/multi-trace-conc.png") #hide
+#md # ![](multi-trace-conc.png)
 
 # Write output CSV
 

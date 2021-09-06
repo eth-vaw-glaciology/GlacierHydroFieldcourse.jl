@@ -1,10 +1,14 @@
 # # Read in all traces
 # This includes both the time series from the CTD sensors and the injection meta-data.
-
+#
 # Read sensor time series and concatenate the time series into one for each sensor
 
+# Load calibration script (also includes helper_functions.jl)
 include("2_calibration.jl")
-pygui(false) # set to true to get interactive plots, false for in-line plots
+## set to true to get interactive plots, false for in-line plots
+pygui(false);
+
+# Now load data-files from CTD sensors
 
 ## for each sensor list all data-files
 fls = Dict(:s145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
@@ -25,7 +29,7 @@ for sens in keys(fls)
         end
     end
     sensor_readouts[sens] = out
-    ## add calibration function
+    ## add calibration function (from 2_calibration.jl)
     sensor_readouts[sens][:cali_fn] = delta_cond2conc[sens]
 end
 

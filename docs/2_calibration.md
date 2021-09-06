@@ -75,7 +75,7 @@ end
 ````
 
 ````
-Main.##472.ml_to_concentration
+Main.##539.ml_to_concentration
 ````
 
 An example, convert to concentration (g/l):
@@ -102,7 +102,7 @@ delta_cond2conc = Dict(a[1] => fit_calibration(bucketsize, solution_conc, a[2]..
 ````
 
 ````
-Dict{Symbol, Main.##472.var"#1#3"{LsqFit.LsqFitResult{Vector{Float64}, Vector{Float64}, Matrix{Float64}, Vector{Float64}}, Main.##472.var"#fn#2"}} with 2 entries:
+Dict{Symbol, Main.##539.var"#1#3"{LsqFit.LsqFitResult{Vector{Float64}, Vector{Float64}, Matrix{Float64}, Vector{Float64}}, Main.##539.var"#fn#2"}} with 2 entries:
   :s309 => #1
   :s145 => #1
 ````

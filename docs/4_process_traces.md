@@ -7,12 +7,37 @@ calculate:
 - times of peaks
 - background and peak concentrations
 
-Writes output to
+Writes output to ../data/products/example/output.csv (change "example" to the current year)
+
+Load "3_traces.jl" (also loads 2_calibration.jl and helper_functions.jl)
 
 ````julia
 include("3_traces.jl")
-pygui(false) # set to true to get interactive plots, false for in-line plots
+# set to true to get interactive plots, false for in-line plots
+pygui(false);
+````
 
+````
+Estimated linear fit: f(delta_cond) = a*conc with
+ a = 0.000812±9.9e-5
+
+Estimated linear fit: f(delta_cond) = a*conc with
+ a = 0.00101±6.89e-5
+
+┌ Warning: No data for sensor s049
+└ @ Main.##541 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+┌ Warning: No data for sensor s049
+└ @ Main.##541 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+┌ Warning: No data for sensor s049
+└ @ Main.##541 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+┌ Warning: No data for sensor s049
+└ @ Main.##541 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+
+````
+
+Make the processing-function (see their doc-string for more info)
+
+````julia
 using Statistics
 
 """
@@ -77,20 +102,20 @@ function process_trace!(tr)
         tr.products[loc][:peak_value] = peak_val
     end
     return nothing
-end
+end;
 ````
 
-````
-Main.##474.process_trace!
-````
-
-Run the processing
+Run the processing on all traces and plot a trace in terms of
+concentration:
 
 ````julia
-process_trace!.(traces)
-plot_trace(traces[1], :conc)
+for trace in traces
+    process_trace!(trace)
+end
+plot_trace(traces[2], :conc)
 ````
-![](2389329343.png)
+
+![](multi-trace-conc.png)
 
 Write output CSV
 

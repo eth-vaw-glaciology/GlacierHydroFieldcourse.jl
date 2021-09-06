@@ -36,6 +36,9 @@ function include2nbinclude(str)
     return str
 end
 
+for fl in files
+    Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
+end
 
 for fl in files
     Literate.notebook(fl, preprocess=include2nbinclude)
@@ -46,8 +49,4 @@ for fl in readdir(".")
     if splitext(fl)[2]==".ipynb"
         mv(fl, "../notebooks/$fl", force=true)
     end
-end
-
-for fl in files
-    Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
 end
