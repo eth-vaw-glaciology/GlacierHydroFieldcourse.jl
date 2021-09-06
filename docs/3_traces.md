@@ -1,18 +1,19 @@
-# # Read in all traces
-# This includes both the time series from the CTD sensors and the injection meta-data.
+# Read in all traces
+This includes both the time series from the CTD sensors and the injection meta-data.
 
-# Read sensor time series and concatenate the time series into one for each sensor
+Read sensor time series and concatenate the time series into one for each sensor
 
+````julia
 include("2_calibration.jl")
 pygui(false) # set to true to get interactive plots, false for in-line plots
 
-## for each sensor list all data-files
+# for each sensor list all data-files
 fls = Dict(:s145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
                    "../data/raw/example/205145-10mH2O_26_08_2021-08_30_00.CSV"],
            :s309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
                    "../data/raw/example/205309-100mH2O_26_08_2021-08_30_00.CSV"],
-           ## :s049=>[],
-           ## :s999
+           # :s049=>[],
+           # :s999
            )
 
 sensor_readouts = Dict()
@@ -25,7 +26,7 @@ for sens in keys(fls)
         end
     end
     sensor_readouts[sens] = out
-    ## add calibration function
+    # add calibration function
     sensor_readouts[sens][:cali_fn] = delta_cond2conc[sens]
 end
 
@@ -37,17 +38,36 @@ legend(keys(sensor_readouts))
 ylabel("Conductivity (μS/cm)")
 fig
 
-#md savefig("../docs/cond-timeseries.png") #hide
-#md # ![](cond-timeseries.png)
+````
 
-# Read tracer metadata.  This CSV-file needs to have the format
-# `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
-# (add more sensors to the back if needed)
+````
+Estimated linear fit: f(delta_cond) = a*conc with
+ a = 0.000812±9.9e-5
+
+Estimated linear fit: f(delta_cond) = a*conc with
+ a = 0.00101±6.89e-5
+
+
+````
+
+![](cond-timeseries.png)
+
+Read tracer metadata.  This CSV-file needs to have the format
+`Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
+(add more sensors to the back if needed)
+
+````julia
 metafile = "../data/raw/example/tracer_metadata.csv"
 d,h = readdlm(metafile, ',', header=true)
+````
 
-# # Make the individual traces
+````
+(Any[1 "Lake" "25.08.2021" "11:10" "11:20" 2000 2 1 "x"; 2 "UpperGlacier" "25.08.2021" "14:05" "14:11" 50 1 2 3; 4 "Lake" "26.08.2021" "09:06" "09:16" 2000 2 "x" 1; 6 "UpperGlacier" "26.08.2021" "13:25" "13:35" 50 3 2 1], AbstractString["Experiment No" "Location" "Date" " Injection time" " End time" " Salt mass [g]" "145" "049" "309"])
+````
 
+# Make the individual traces
+
+````julia
 struct Trace
     nr
     location
@@ -58,13 +78,13 @@ struct Trace
     products
 end
 
-## Go through all meta-data lines and creates a Tracer-experiment for it
+# Go through all meta-data lines and creates a Tracer-experiment for it
 traces = []
 for nr in 1:size(d,1)
     tinj = Dates.Date(d[nr,3], DateFormat("dd.mm.yyyy")) + Dates.Time(d[nr,4], "HH:MM")
     tend = Dates.Date(d[nr,3], DateFormat("dd.mm.yyyy")) + Dates.Time(d[nr,5], "HH:MM")
 
-    ## figure out which sensors/loggers were used
+    # figure out which sensors/loggers were used
     local sensor_name = Symbol.("s".*h[7:end])
     sensors = Dict()
     for snr=1:length(sensor_name)
@@ -115,8 +135,26 @@ function plot_trace(tr, field=:cond)
     return f
 end
 
-## Example
+# Example
 plot_trace(traces[2])
 
-#md savefig("../docs/multi-trace.png") #hide
-#md # ![](multi-trace.png)
+````
+
+````
+┌ Warning: No data for sensor s049
+└ @ Main.##431 string:23
+┌ Warning: No data for sensor s049
+└ @ Main.##431 string:23
+┌ Warning: No data for sensor s049
+└ @ Main.##431 string:23
+┌ Warning: No data for sensor s049
+└ @ Main.##431 string:23
+
+````
+
+![](multi-trace.png)
+
+---
+
+*This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+

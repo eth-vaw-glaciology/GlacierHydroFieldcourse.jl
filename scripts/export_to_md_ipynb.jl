@@ -1,11 +1,11 @@
 using Literate
 
 files = ["helper_functions.jl",
-         # "1_intro.jl",
-         # "2_calibration.jl",
-         # "3_traces.jl",
-         # "4_process_traces.jl",
-         # "5_further_work.jl",
+         "1_intro.jl",
+         "2_calibration.jl",
+         "3_traces.jl",
+         "4_process_traces.jl",
+         "5_further_work.jl",
          "quick_data_visualisation.jl"
          ]
 
@@ -36,18 +36,20 @@ function include2nbinclude(str)
     return str
 end
 
+
 for fl in files
     Literate.notebook(fl, preprocess=include2nbinclude)
 end
+# Cannot export directly to ../notebooks as then @nbinclude does not work.
+# Instead move them by hand:
 for fl in readdir(".")
     if splitext(fl)[2]==".ipynb"
-        mv(fl, "../notebooks/$fl")
+        mv(fl, "../notebooks/$fl", force=true)
     end
 end
+mv("output.csv", "../notebooks/output.csv", force=true)
 
-# for fl in files
-#     Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
-# end
-
-# Literate.markdown("1_intro.jl", outputdir="../docs", execute=true, flavor = Literate.FranklinFlavor())
-# Literate.markdown("quick_data_visualisation.jl", outputdir="../docs", execute=false, flavor = Literate.FranklinFlavor() )
+for fl in files
+    Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
+end
+mv("output.csv", "../docs/output.csv", force=true)

@@ -1,0 +1,4 @@
+Place your raw data into a subfolder of this folder, e.g. 2021/
+
+Also take note of the tracer_metadata.csv file: in such a file you
+need to specify all the traces you did.

@@ -1,14 +1,15 @@
-# # Process traces
-#
-# First runs scripts/notebooks `2_calibration` and `3_traces`.  Then
-# calculate:
-# - concentration
-# - discharge
-# - times of peaks
-# - background and peak concentrations
-#
-# Writes output to
+# Process traces
 
+First runs scripts/notebooks `2_calibration` and `3_traces`.  Then
+calculate:
+- concentration
+- discharge
+- times of peaks
+- background and peak concentrations
+
+Writes output to
+
+````julia
 include("3_traces.jl")
 pygui(false) # set to true to get interactive plots, false for in-line plots
 
@@ -67,25 +68,33 @@ Process one trace at each sensor location/for each sensor:
 function process_trace!(tr)
     make_concentration!(tr)
     for loc in keys(tr.sensors)
-        ## calc discharge (m3/s)
+        # calc discharge (m3/s)
         Q = tr.mass/1000/integrate_concentration(tr.sensors[loc][:tsec], tr.sensors[loc][:conc])
         tr.products[loc][:Q] = round(Q, sigdigits=2)
-        ## get time of peak in secs after injection
+        # get time of peak in secs after injection
         peak_val, peak_ind = findmax(tr.sensors[loc][:conc])
         tr.products[loc][:peak_time] = tr.sensors[loc][:tsec][peak_ind]
         tr.products[loc][:peak_value] = peak_val
     end
     return nothing
 end
+````
 
+````
+Main.##432.process_trace!
+````
 
-# Run the processing
+Run the processing
 
+````julia
 process_trace!.(traces)
 plot_trace(traces[1], :conc)
+````
+![](2389329343.png)
 
-# Write output CSV
+Write output CSV
 
+````julia
 function write_output(traces, fl)
     out = [["Experiment No", "Location", "Date" , "Injection time", "End time", "Salt mass [g]",
             145, 049, 309, "Q1", "Q2", "Q3", "t1", "t2", "t3"]]
@@ -108,8 +117,14 @@ function write_output(traces, fl)
 end
 
 write_output(traces, "output.csv")
+````
 
-# This produces a CSV output file with the headers
-# `Experiment No,Location,Date,Injection time,End time,Salt mass [g],145,49,309,Q1,Q2,Q3,t1,t2,t3`
-# i.e. similar to the input `tracer_metadata.csv` but with added discharges and time-of-peak for
-# each sensor: [`output.csv`](output.csv)
+This produces a CSV output file with the headers
+`Experiment No,Location,Date,Injection time,End time,Salt mass [g],145,49,309,Q1,Q2,Q3,t1,t2,t3`
+i.e. similar to the input `tracer_metadata.csv` but with added discharges and time-of-peak for
+each sensor: [`output.csv`](output.csv)
+
+---
+
+*This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+

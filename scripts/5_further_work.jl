@@ -2,6 +2,7 @@
 #
 # You now have the discharges and time between the detection sites.  What to do next?
 
+include("4_process_traces.jl") # load previous work
 
 # ## Stage-discharge relation and continuous Q
 #
