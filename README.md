@@ -11,7 +11,7 @@ VAW Glaciology Field Course: Glacier Hydrology
 This is for Linux (if you know what to do on Mac OS or Windows,
 please let me know).
 
-- install with your package manager: `git`, `matplotlib`, `jupyter`
+- install with your Linux-distribution package manager: `git`, `matplotlib`, `jupyter`
 - install Julia:
   - download the binaries from https://julialang.org/downloads/
   - unpack it with `tar xvvzf name-of-download.tar.gz` in a suitable

@@ -47,9 +47,7 @@ for fl in readdir(".")
         mv(fl, "../notebooks/$fl", force=true)
     end
 end
-mv("output.csv", "../notebooks/output.csv", force=true)
 
 for fl in files
     Literate.markdown(fl, "../docs", execute=true, flavor = Literate.FranklinFlavor() )
 end
-mv("output.csv", "../docs/output.csv", force=true)

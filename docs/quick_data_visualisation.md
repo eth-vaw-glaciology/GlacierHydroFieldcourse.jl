@@ -44,18 +44,17 @@ end
 ````
 
 ````
-Main.##434.plotit
+Main.##476.plotit
 ````
 
-Call above function to do the plotting.  Examples:
+Call above function to do the plotting.  Example plotting the pressure:
 
 ````julia
-##plotit("../data/example_raw/DC_22627.TXT", :DCX22, :press) # TODO...
-plotit("../data/example_raw/205144-10mH2O_12_08_2019-08_00_00.CSV", :CTD, :press)
+plotit("../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV", :CTD, :press)
 ````
 
 ````
-PyObject Text(0.5, 1.0, '../data/example_raw/205144-10mH2O_12_08_2019-08_00_00.CSV, sensor=CTD, variable=press')
+PyObject Text(0.5, 1.0, '../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV, sensor=CTD, variable=press')
 ````
 
 ---

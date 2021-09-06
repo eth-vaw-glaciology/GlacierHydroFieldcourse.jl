@@ -107,9 +107,12 @@ function write_output(traces, fl)
     writedlm(fl, out, ',')
 end
 
-write_output(traces, "output.csv")
+write_output(traces, "../data/products/example/output.csv")
 
 # This produces a CSV output file with the headers
+#
 # `Experiment No,Location,Date,Injection time,End time,Salt mass [g],145,49,309,Q1,Q2,Q3,t1,t2,t3`
+#
 # i.e. similar to the input `tracer_metadata.csv` but with added discharges and time-of-peak for
-# each sensor: [`output.csv`](output.csv)
+# each sensor [`output.csv`](../data/example_pro/output.csv).  It's located in `../data/example_pro/`,
+# for your output data you should make a folder such as `../data/products/2021`.

@@ -53,7 +53,9 @@ Estimated linear fit: f(delta_cond) = a*conc with
 ![](cond-timeseries.png)
 
 Read tracer metadata.  This CSV-file needs to have the format
+
 `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
+
 (add more sensors to the back if needed)
 
 ````julia
@@ -142,13 +144,13 @@ plot_trace(traces[2])
 
 ````
 ┌ Warning: No data for sensor s049
-└ @ Main.##431 string:23
+└ @ Main.##473 string:23
 ┌ Warning: No data for sensor s049
-└ @ Main.##431 string:23
+└ @ Main.##473 string:23
 ┌ Warning: No data for sensor s049
-└ @ Main.##431 string:23
+└ @ Main.##473 string:23
 ┌ Warning: No data for sensor s049
-└ @ Main.##431 string:23
+└ @ Main.##473 string:23
 
 ````
 

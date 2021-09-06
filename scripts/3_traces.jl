@@ -41,7 +41,9 @@ fig
 #md # ![](cond-timeseries.png)
 
 # Read tracer metadata.  This CSV-file needs to have the format
+#
 # `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
+#
 # (add more sensors to the back if needed)
 metafile = "../data/raw/example/tracer_metadata.csv"
 d,h = readdlm(metafile, ',', header=true)

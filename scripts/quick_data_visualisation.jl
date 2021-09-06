@@ -36,7 +36,5 @@ function plotit(filename, sensor, variable=:cond)
     title("$filename, sensor=$sensor, variable=$variable")
 end
 
-# Call above function to do the plotting.  Examples:
-
-##plotit("../data/example_raw/DC_22627.TXT", :DCX22, :press) # TODO...
-plotit("../data/example_raw/205144-10mH2O_12_08_2019-08_00_00.CSV", :CTD, :press)
+# Call above function to do the plotting.  Example plotting the pressure:
+plotit("../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV", :CTD, :press)
