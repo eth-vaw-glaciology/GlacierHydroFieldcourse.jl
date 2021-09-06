@@ -1,10 +1,10 @@
 VAW Glaciology Field Course: Glacier Hydrology
 ==============================================
 
-- the field instructions are in `instructions/`
-- the notebooks in the `notebook/` folders which can be used to
+- the field instructions are in [`instructions/`](instructions).
+- the notebooks in the [`notebooks/`](notebooks) folders which can be used to
   evaluate salt-dilution gauging data.
-- if you prefere, you can do the same with the scripts in `scripts/`
+- if you prefere, you can do the same with the scripts in [`scripts/`](scripts).
 
 # Installation
 
@@ -37,4 +37,4 @@ Once completed, close Julia. Now
 
 # Documentation
 
-Documentation is found in [`docs/`](docs), start with [`1_intro`](blob/master/docs/intro.md).
+Documentation is found in [`docs/`](docs), start with `1_intro.md`.
