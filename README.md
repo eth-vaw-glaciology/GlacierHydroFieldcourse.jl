@@ -37,4 +37,4 @@ Once completed, close Julia. Now
 
 # Documentation
 
-Documentation is found in [`docs/`](docs), start with `1_intro.md`.
+Documentation is found in [`docs/`](docs), start with [`1_intro.md`](docs/1_intro.md).
