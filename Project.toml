@@ -1,4 +1,5 @@
 name = "GlacierHydroFieldcourse"
+uuid = "a758561c-23e9-11ed-051c-4d3fdde944e1"
 
 [deps]
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
