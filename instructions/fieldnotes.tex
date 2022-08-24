@@ -51,11 +51,16 @@
   \todo{Make better intro: hydro, measurements,...}
 
 The aim of the glacier hydrology group is to quantify supraglacial and
-proglacial water runoff using different methods.  Additionally, if
-available, we measure water level in boreholes.  These measurement
+proglacial water runoff using different methods.  % Additionally, if
+% available, we measure water level in boreholes.
+These measurement
 will provide insights into the glacier drainage system, as well as
 demonstrating how linking several measurements (salt-dilution gauging,
 stage measurements) can yield the desired quantity (discharge).
+
+% 2022 special
+Additionally, we plan to study a collapse feature on the lowest part
+of the tongue.
 
 The text book by Hubbard \& Glasser (2005, p73-79; a copy is in the
 field-material provided) gives an introduction to salt dilution
@@ -91,6 +96,7 @@ Pack-list:\\
   \item one small bottle of fluorescent dye (just for fun!)
   \item cord (20m, at least 7mm) \& screw carabiner (to secure descent route at
     proglacial stream)
+  \item measuring tape
   \end{itemize}
 \item Salt dilution:
   \begin{itemize}
@@ -107,8 +113,11 @@ Pack-list:\\
   \end{itemize}
 \item Stage of lake and streams
   \begin{itemize}
-  \item 2x Keller DCX-22 pressure sensor in protective casing to
-    reduce risk of fine sediment clogging sensor
+  \item 2x Keller DCX-22 pressure sensor
+  \begin{itemize}
+    \item protective casing to
+      reduce risk of fine sediment clogging sensor
+    \end{itemize}
   \item 1x Keller DCX-22AA dual pressure sensor (water \& air)
   \item cord (2-3mm), about 20\,m in total
   \item big ice picks
@@ -145,7 +154,7 @@ Be sure to set/check the clock on the datalogger to Swiss summer time.
 The \textbf{Keller sensor} is a DCX22 CTD sensor and logger.  It has
 no interface like the other but needs to be programmed with a laptop
 (the day/evening before).  See \ref{s:press-trans} for the
-configuration, same as DCX-22.
+configuration, same as DCX-22 and DCX-22AA.
 
 \subsection{Salt calibration solution}
 \note{Prepare the 10g so we don't have to all go the the Analyseraum,
@@ -159,7 +168,7 @@ The aim is to produce a 1g/l and a 10g/l calibration solution here at the VAW
   ``Analyseraum'' at VAW)
 \item take 1l of distilled water (should have about 3\,$\mu$S/cm),
   make sure to rinse the container first with distilled water
-\item dissolve it in the 1l, put 100ml in a rinsed, glass sampling bottles $\rightarrow$
+\item dissolve the 10g of salt in the 1l of distilled water, put 100ml in a rinsed, glass sampling bottles $\rightarrow$
   10g/l solution (should read about 17$\times$10$^3\,\mu$
   S/cm)
 \item take 10ml of the 10g/l solution and add it to 90ml distilled
@@ -189,7 +198,7 @@ Measure out zip-lock bags of 10x 10g, 10x 20g, 5x 50g, and 10x 1kg.
 \label{s:press-trans}
 
 We'll employ a series of pressure transducers to record: lake-level,
-stream-level and, maybe, air-pressure.
+stream-level and air-pressure.
 
 % \textbf{DC-22} can only be configured with Frostly, the old Tough-Book
 % running Windows XP.
@@ -210,8 +219,9 @@ stream-level and, maybe, air-pressure.
 %   \item unplug sensor, add cap, and shutdown computer
 % \end{itemize}
 
-\textbf{DCX-22} (pressure only) and \textbf{DCX-22 CTD} (with
-conductivity).  Configuration and download is with the field-laptop.
+\textbf{DCX-22} (pressure only), \textbf{DCX-22AA} (pressure of water
+and air) and \textbf{DCX-22 CTD} (with conductivity).  Configuration
+and download is with the field-laptop.
 
 
 \begin{itemize}
@@ -221,7 +231,8 @@ conductivity).  Configuration and download is with the field-laptop.
   \item Open ``Logger 5''.  \textbf{Note:} be patient with the
     program, sometimes it is rather slow.
   \item plug in cable K-104A \& sensor to that cable
-  \item press ``F2'' (scan ports) and after waiting a bit click ``Programming''
+  \item press ``F2'' (scan ports) and after waiting a bit click
+    ``Programming'' [maybe you have to click on ``Activate'', bottom right]
 \item For \emph{\bf pressure-only (DXC-22)} modify settings to
   \begin{itemize}
   \item Device memory: ``Linear''
@@ -232,7 +243,7 @@ conductivity).  Configuration and download is with the field-laptop.
 \item Click ``Write configuration'' (click through warnings), wait
   some time until it says ``Record active'' at the bottom
 \end{itemize}
-\item For \emph{\bf dual pressure-sensor (DXC-22aa CTD)} modify settings to
+\item For \emph{\bf dual pressure-sensor (DXC-22AA)} modify settings to
   \begin{itemize}
   \item Device memory: ``Linear''
   \item Device clock: check box ``Adjust device clock...''
@@ -279,7 +290,7 @@ which you will be gauging with the salt dilution tracer method (see
 below).
 
 Separately, probably on another day, map a few catchments with the
-Trimble GPS (or the handheld if the Trimble is not available).  The
+RTK GPS (or the handheld if the RTK is not available).  The
 catchment mapping may be more difficult: the idea is to walk along the
 watershed (Wasserscheide) and record the coordinates.  Depending on
 the watershed it will be tricky to determine its exact location.
@@ -323,8 +334,8 @@ experiments, install an automatic stage measurement station.
 
 For this place a pressure sensor into a pool of water.  As the stream
 is probably small, make a pool with the big ice pick.  Place the
-DXC-22aa sensor into it, secure it to a pole (get the group
-with the drill you a hole).
+DXC-22AA sensor into it, secure it to a pole (get the group
+with the Kovacs to drill you a hole).
 
 
 % This
