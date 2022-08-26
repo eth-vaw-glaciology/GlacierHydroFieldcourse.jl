@@ -1,7 +1,7 @@
 # # Process traces
 #
 # First runs scripts/notebooks `2_calibration` and `3_traces`.  Then
-# calculate:
+# calculate for each trace:
 # - concentration
 # - discharge
 # - times of peaks
@@ -47,7 +47,8 @@ Input:
 - t -- times (s)
 - conc -- concentration (g/l) time series (convert conductivity with f_readout2conc
           to a concentration)
-- minconc -- if concentration drops below this value, discard that value
+- minconc -- if concentration drops below this value, discard that value.  Useful to
+             discard values which are before/after the sensor is in the water.
 
 Output:
 

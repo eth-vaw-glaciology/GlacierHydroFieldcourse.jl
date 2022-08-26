@@ -98,6 +98,7 @@ for (i,sens) in enumerate(keys(delta_cond2conc))
     title(sens)
 end
 
+## mkpath("../plots")
 ## savefig("../plots/calibration.png") # to save this figure to a file, useful for your presentation
 
 ## return `fig` to show it in notebook

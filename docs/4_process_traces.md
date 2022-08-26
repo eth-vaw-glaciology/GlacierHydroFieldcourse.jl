@@ -1,7 +1,7 @@
 # Process traces
 
 First runs scripts/notebooks `2_calibration` and `3_traces`.  Then
-calculate:
+calculate for each trace:
 - concentration
 - discharge
 - times of peaks
@@ -25,13 +25,13 @@ Estimated linear fit: f(delta_cond) = a*conc with
  a = 0.00101±6.89e-5
 
 ┌ Warning: No data for sensor s049
-└ @ Main.##278 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
 ┌ Warning: No data for sensor s049
-└ @ Main.##278 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
 ┌ Warning: No data for sensor s049
-└ @ Main.##278 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
 ┌ Warning: No data for sensor s049
-└ @ Main.##278 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:79
+└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
 
 ````
 
@@ -69,7 +69,8 @@ Input:
 - t -- times (s)
 - conc -- concentration (g/l) time series (convert conductivity with f_readout2conc
           to a concentration)
-- minconc -- if concentration drops below this value, discard that value
+- minconc -- if concentration drops below this value, discard that value.  Useful to
+             discard values which are before/after the sensor is in the water.
 
 Output:
 
