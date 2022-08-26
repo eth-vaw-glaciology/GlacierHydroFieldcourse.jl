@@ -21,11 +21,11 @@ Function which does the plotting
 
 ````julia
 """
-   plotit(filename, sensor, variable)
+   plotit(filename, sensor, variable=:cond, ax=gca())
 
-Plots the results from one file.
+Plots the results from one file.  By default into the current axis
 """
-function plotit(filename, sensor, variable=:cond)
+function plotit(filename, sensor, variable=:cond, ax=gca())
     # load
     if sensor==:CTD
         d = read_Keller_DCX22_CTD(filename)
@@ -37,14 +37,13 @@ function plotit(filename, sensor, variable=:cond)
         error("Don't know how to read data from sensor: $sensor")
     end
     # plot
-    figure()
     plot(d[:t], d[variable])
     title("$filename, sensor=$sensor, variable=$variable")
 end
 ````
 
 ````
-Main.##543.plotit
+Main.##280.plotit
 ````
 
 Call above function to do the plotting.  Example plotting the pressure:
