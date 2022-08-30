@@ -103,7 +103,7 @@ function write_output(traces, fl)
 
         locdict = Dict(v[:sensor_name]=>k for (k,v) in tr.sensors)
         push!(out, [tr.nr, tr.location,  Dates.format(tr.tinj, "dd.mm.yyyy"), Dates.format(tr.tinj, "HH:MM:SS"),
-                    Dates.format(tr.tend, "dd.mm.yyyy"), tr.mass,
+                    Dates.format(tr.tend, "HH:MM:SS"), tr.mass,
                     get(locdict,:s145,"x"),
                     get(locdict,:s049,"x"),
                     get(locdict,:s309,"x"),
