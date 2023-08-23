@@ -1,0 +1,88 @@
+% Created 2016-08-31 Wed 10:11
+\documentclass[DIV=15,halfparskip,11pt,headinclude]{scrartcl}
+\usepackage[utf8]{inputenc}
+\newcommand{\un}[1]{\ \textrm{#1}}
+\newcommand{\rd}{\,\mathrm{d}}
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\Div}[1]{\nabla \cdot \mathbf{#1}}
+\newcommand{\bm}[1]{\mathbf{#1}}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+%\usepackage{minted}
+\author{Mauro Werder}
+\date{\today}
+\title{ETH glaciology field-course 2018:\\ stream gauging}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={ETH glaciology field-course}
+  }
+\begin{document}
+
+\section{How to log data with WTW conductivity sensor}
+
+At measurement site:
+\begin{enumerate}
+\item if discharge is too low to fully submerge the sensor, make a
+depression with the ice axe.
+\item place sensor in stream (the sensor is fully waterproof),
+  ideally with the sensor located in the central part of the stream
+\item let the sensor temperature stabilise ($\sim$2min)
+\item write down the background conductivity
+\item set the datalogger:
+\begin{itemize}
+\item long press on ``STO''
+\item make sure sampling interval is 1s
+\item select long enough logging time, maybe 3min
+\item hit ``continue'' to start the logging
+\end{itemize}
+\item signal to others to initiate injection
+\item check the sensor readout during the tracer passage.  Make sure
+  that:
+\begin{itemize}
+\item maximum concentration does not go $\sim$2x above maximal
+  calibrated concentration (if not repeat with less salt)
+\item that concentration rises by at least 50$\mathrm{\mu S/cm}$ to get
+  a good signal to noise ratio (if not repeat with more salt)
+\item the time interval is more than 15 seconds during which the
+  signal is at least 10$\mathrm{\mu S/cm}$ above background (if not
+  repeat but inject salt more slowly or further up in the stream.
+  This may necessitate a larger quantity.)
+\end{itemize}
+\item check that the data has been logged: long-press ``RCL'' \& check
+  that counter increased by 60 per minuted logged. (Alternatively go
+  back with the arrow keys to check for current logging entries).
+  \textbf{In several instances we mysteriously lost data of some
+    traces, so please do this check after each trace.}
+\end{enumerate}
+
+
+Download:
+\begin{itemize}
+\item switch datalogger on
+\item insert USB-stick
+\item long press ``Menu/Enter''
+\item got to ``Data storage''
+\item got to ``Automatic data storage''
+\item got to ``Output to USB''
+\item once finished it will return to the previous screen, remove USB
+  stick.
+\end{itemize}
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
