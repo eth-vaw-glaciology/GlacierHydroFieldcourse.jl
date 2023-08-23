@@ -157,7 +157,7 @@ function read_WTW(filename)
         error("Filename $filename is not a file!")
     end
     if !startswith(splitdir(filename)[2], "AD")
-        warn("Read in a file starting with `AD`.  (The `AC` files use a comma for the decimal point.")
+        @warn("Read in a file starting with `AD`.  (The `AC` files use a comma for the decimal point.")
     end
     d, head = readdlm(filename, ';', header=true)
     out = Dict{Symbol,Any}() ## key has the be Symbol, value can be anything

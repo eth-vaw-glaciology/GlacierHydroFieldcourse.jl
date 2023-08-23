@@ -21,12 +21,14 @@ Plots the results from one file.  By default into the current axis
 """
 function plotit(filename, sensor, variable=:cond, ax=gca())
     ## load
-    if sensor==:CTD
-        d = read_Keller_DCX22_CTD(filename)
+    d = if sensor==:CTD
+        read_Keller_DCX22_CTD(filename)
     elseif sensor==:DC22
-        d = read_Keller_DC22(filename)
+        read_Keller_DC22(filename)
     elseif sensor==:DCX22
-        d = read_Keller_DCX22(filename)
+        read_Keller_DCX22(filename)
+    elseif sensor==:WTW
+        read_WTW(filename)
     else
         error("Don't know how to read data from sensor: $sensor")
     end
@@ -37,3 +39,4 @@ end
 
 # Call above function to do the plotting.  Example plotting the pressure:
 plotit("../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV", :CTD, :press)
+plotit("../data/raw/example-WTW/AD422041.CSV", :WTW, :cond)
