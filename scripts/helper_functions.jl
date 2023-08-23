@@ -160,18 +160,18 @@ function read_WTW(filename)
         warn("Read in a file starting with `AD`.  (The `AC` files use a comma for the decimal point.")
     end
     d, head = readdlm(filename, ';', header=true)
-    out = Dict{Symbol,Any}() # key has the be Symbol, value can be anything
-    # time 12.08.2016 13:36:58
+    out = Dict{Symbol,Any}() ## key has the be Symbol, value can be anything
+    ## time 12.08.2016 13:36:58
     fmt = "d.m.y H:M:S"
     out[:t] = [DateTime(dd, fmt) for dd in d[:,4]]
-    # conductivity
+    ## conductivity
     out[:cond] = d[:,5]
     units = d[:,6]
     @assert all(units.=="\xb5S/cm") "Units not in μS/cm!"
-    # temp
+    ## temp
     out[:temp] = d[:,8]
 
-    # purge any records which are simultaneous (not sure why this happens with the WTW)
+    ## purge any records which are simultaneous (not sure why this happens with the WTW)
     purge = findall(diff(out[:t]).==Second(0))
     for p in reverse(purge)
         deleteat!(out[:t], p)
