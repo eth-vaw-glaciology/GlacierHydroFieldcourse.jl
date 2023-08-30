@@ -53,20 +53,21 @@
 The aim of the glacier hydrology group is to quantify supraglacial and
 proglacial water runoff using different methods.  % Additionally, if
 % available, we measure water level in boreholes.
-These measurement
-will provide insights into the glacier drainage system, as well as
-demonstrating how linking several measurements (salt-dilution gauging,
-stage measurements) can yield the desired quantity (discharge).
+These measurement will provide insights into the glacier drainage
+system, such as water storage and delays as the water passes through
+the glacier.  Such measurements would form part of any field campaign
+aiming to look at subglacial water flows to provide knowledge on the
+boundary conditions of that system.
 
-% 2022 special
-Additionally, we plan to study a collapse feature on the lowest part
-of the tongue.
+This work can be linked to the work of the mass-balance group and the
+surface DEM group,
+%
+From a practical point of view these measurements will show how
+linking several measurements (salt-dilution gauging, stage
+measurements, etc.) can be processed to yield the desired quantity
+(discharge).
 
-The text book by Hubbard \& Glasser (2005, p73-79; a copy is in the
-field-material provided) gives an introduction to salt dilution
-gauging.  I recommend reading this if you are not familiar with the
-method to get a description of it.  Note though that they use a
-slightly different, but equivalent, approach.
+
 
 \section{Preparation at ETH}
 
@@ -83,22 +84,46 @@ slightly different, but equivalent, approach.
 % - charge it
 % - clear it
 
-Pack-list:\\
+\subsection{Learning}
+
+The text book by Hubbard \& Glasser (2005, p65--79; a copy is in the
+field-material provided) gives an introduction glacier hydrology
+measurements and to salt dilution gauging.
+Note though that they use a slightly different, but equivalent,
+approach.
+\begin{itemize}
+\item read and discuss amongst you p65--79
+\end{itemize}
+Ask Mauro if there is anything unclear.
+
+Familiarise yourself with the provided scripts and code on\\
+\url{https://github.com/eth-vaw-glaciology/GlacierHydroFieldcourse.jl}.
+Steps:
+\begin{itemize}
+\item find Mauro
+\item get Julia and Jupyter installed
+\item go through the notebooks and run them
+\end{itemize}
+
+
+\subsection{Packing the material}
 \begin{itemize}
 \item Misc:
   \begin{itemize}
   \item several copies of these instructions
   \item Puma-tape and string
+  \item ETH-VAW stickers
   \item hand-held GPS / smart phone which displays coordinates
     (preferably Swiss system)
   \item Camera / smart phone
-  \item two or three radios (walky-talky)
+  \item one radio (walky-talky)
   \item some small bottle of fluorescent dye (just for fun! 25g of SRB
-    are enough for a good color-display at the proglacial stream)
-  \item cord (20m, at least 7mm) \& screw carabiner (to secure descent route at
+    or Uranine are enough for a good color-display at the proglacial
+    stream)
+  \item static cord (30m, at least 7mm) \& 2 screw carabiner (to secure descent route at
     proglacial stream)
-  \item measuring tape
-  \item screw driver (for poles)
+  \item measuring tape 50m
+  \item screw driver (\#3, for poles)
   \end{itemize}
 \item Salt dilution:
   \begin{itemize}
@@ -109,8 +134,8 @@ Pack-list:\\
   \item 2x big bucket (10l) and stirring implement
   \item 1l measuring pot
   \item calibration solutions
-  \item poles: 4x 2m + 2x connector to attach sensors when measuring
-    lake outflow
+  \item poles: 4x 2m + 2x connector (to attach sensors when measuring
+    lake outflow)
   \item 8x wooden poles to mark injection and
     detection points of two supraglacial streams.
   \end{itemize}
@@ -124,7 +149,6 @@ Pack-list:\\
   \item 1x Keller DCX-22AA dual pressure sensor (water \& air)
   \item cord (2-3mm), about 20\,m in total
   \item cord (2-3mm), smaller about 1m pieces
-  \item big ice picks
   \item doppelmeter (yardstick)
   \end{itemize}
 \item For Tiefenbach (base-camp / in car)
@@ -133,10 +157,11 @@ Pack-list:\\
   \item USB stick
   \item cable to download Keller sensors
   \item WTW charger (probably in its box)
-  \item scales
+  \item kitchen scales
   \item spare salt (at least 10kg)
   \item spare zip-lock bags
   \item weight to attach to probe (for measurements in Gletsch)
+  \item big ice pick (in case surface streams have very low water)
   \end{itemize}
 \end{itemize}
 
@@ -145,7 +170,7 @@ Pack-list:\\
 \subsection{Conductivity meters}
 \label{s:cond-meters}
 
-You are using a conductivity meter by WTW and one by Keller.
+You are using a conductivity meter by WTW and two by Keller.
 
 The \textbf{WTW sensor} is a TetraCon 925, the logger is a Multi 3630 IDS.  It
 has certain quirks, be sure to follow the steps outlined in
@@ -172,61 +197,51 @@ The aim is to produce a 1g/l and a 10g/l calibration solution here at the VAW
   ``Analyseraum'' at VAW)
 \item take 1l of distilled water (should have about 3\,$\mu$S/cm),
   make sure to rinse the container first with distilled water
-\item dissolve the 10g of salt in the 1l of distilled water, put 100ml in a rinsed, glass sampling bottles $\rightarrow$
-  10g/l solution (should read about 17$\times$10$^3\,\mu$
+\item dissolve the 10g of salt in the 1l of distilled water
+\item put 100ml in a rinsed, glass sampling bottles $\rightarrow$ this
+  is the 10g/l calibration solution (should read about 17$\times$10$^3\,\mu$
   S/cm)
 \item take 10ml of the 10g/l solution and add it to 90ml distilled
   water (in one of those sampling bottles).  $\rightarrow$ 1g/l
-  solution.  (should read about 1900$\times$10$^3\,\mu$ on the WTW)
+  calibration solution.  (should read about 1900$\times$10$^3\,\mu$ on the WTW)
 \end{itemize}
 
-\subsubsection{Test Calibration}
+\subsubsection{Test calibration (if time permits)}
 
-First, be sure to set/check the clock on the datalogger to Swiss
-summer time!
+First, program the Keller CTD sensors to log the calibration, see
+\ref{s:press-trans}.
 
 Perform one calibration with distilled water: measure conductivity of
 1l of distilled water after adding a total 0ml, 1ml, 5ml, and 10ml of
 the 1g/l solution.  Repeat same with the 10g/l solution, starting with
 fresh distilled water.
 
+Download the data from the CTD sensors.
+
+
 \subsection{Salt pre-packaging}
 \note{double check this is ok}
 
-Measure out zip-lock bags of 10x 10g, 10x 20g, 5x 50g, and 10x 1kg.
-% The rests keep in the 1kg boxes.
-% However, put those boxes in zip-lock
-% as they disintegrate when getting wet.
+Measure out zip-lock bags of 10x 10g, 10x 20g, 5x 50g, and 10x 2kg.
 
-\subsection{Pressure transducers}
+\subsection{Sensors and data loggers}
+\subsubsection{WTW sensor}
+
+Check that the time of the WTW sensor is set correctly (Swiss summer
+time).  If not, consult the manual on how to set it.
+
+\subsubsection{Keller sensors}
 \label{s:press-trans}
 
-We'll employ a series of pressure transducers to record: lake-level,
-stream-level and air-pressure.
-
-% \textbf{DC-22} can only be configured with Frostly, the old Tough-Book
-% running Windows XP.
-% \begin{itemize}
-%   \item check/set time and date of computer (to an accuracy 1 minute)
-% \item Open ``Logger 3.1''
-% \item Click button with ``C'' and right arrow
-% \item Modify settings to
-% \begin{itemize}
-% \item Storage rate: 1 minute
-% \item Channels to be recorded: ``p1'', ``t1''
-% \item Start mode: ``at write configuration''
-% \item Check tick-box ``synchronize device clock with PC clock''
-% \item Amount: ``complete memory''
-% \end{itemize}
-% \item write to device: click button ``C'' with left arrow.  Click
-%   ``ok''/``ja'' for warnings.
-%   \item unplug sensor, add cap, and shutdown computer
-% \end{itemize}
+We'll employ a series of Keller sensors (the silver cylindrical ones)
+to record: conductivity, lake-level, stream-level and air-pressure.
 
 \textbf{DCX-22} (pressure only), \textbf{DCX-22AA} (pressure of water
 and air) and \textbf{DCX-22 CTD} (with conductivity).  Configuration
-and download is with the field-laptop.
-
+and download is with the field-laptop or your own if you install
+the ``Logger 5''
+program\\
+\url{https://download.keller-druck.com/api/download/rF8RVxQeojzuZmxZJ2ZtDF/en/latest.zip}.
 
 \begin{itemize}
   \item check/set time and date of computer (to an accuracy 1
@@ -241,21 +256,25 @@ and download is with the field-laptop.
   \begin{itemize}
   \item Device memory: ``Linear''
   \item Device clock: check box ``Adjust device clock...''
-    \item Start record: ``Immediatly when writing configuration''
+  \item Start record: ``Certain time and date''
+    Time: 8:30, date: the next day
 \item Measure interval: 1 minute
 \item Channels: ``P1'', ``TOB1''
 \item Click ``Write configuration'' (click through warnings), wait
-  some time until it says ``Record active'' at the bottom
+  some time until it says ``Record prepared'' at the bottom
+\item These pressure transducer are for the lake should go into a casing to avoid
+it getting clogged by fine lake sediments.
 \end{itemize}
 \item For \emph{\bf dual pressure-sensor (DXC-22AA)} modify settings to
   \begin{itemize}
   \item Device memory: ``Linear''
   \item Device clock: check box ``Adjust device clock...''
-    \item Start record: ``Immediatly when writing configuration''
-\item Measure interval: 30 Sec (should give approx 8 days recording time)
+  \item Start record: ``Certain time and date''
+    Time: 8:30, date: the next day
+\item Measure interval: 1 minute (should give approx 16 days recording time)
 \item Channels: ``P1'', ``P2'', ``TOB1'', ``TOB2''
 \item Click ``Write configuration'' (click through warnings), wait
-  some time until it says ``Record active'' at the bottom
+  some time until it says ``Record prepared'' at the bottom
 \end{itemize}
 \item For \emph{\bf conductivity (DXC-22 CTD)} modify settings to
   \begin{itemize}
@@ -276,8 +295,6 @@ and download is with the field-laptop.
 \item Unplug sensor, close ``Logger 5''
 \end{itemize}
 
-The pressure transducer for the lake should go into a casing to avoid
-it getting clogged by fine lake sediments.
 
 \section{In the Field}
 \subsection{Mapping}
@@ -428,13 +445,13 @@ depression with the ice axe.
 \item place Keller CTD sensor close-by
 \item let the sensor temperature stabilise ($\sim$2min)
 \item write down the background conductivity of the WTW
-% \item set the WTW datalogger:
-% \begin{itemize}
-% \item long press on ``STO''
-% \item make sure sampling interval is 1s
-% \item select long enough logging time, maybe 3min
-% \item hit ``continue'' to start the logging
-% \end{itemize}
+\item set the WTW datalogger to record data:
+\begin{itemize}
+\item long press on ``STO''
+\item make sure sampling interval is 1s
+\item select long enough logging time, maybe 3min
+\item hit ``continue'' to start the logging
+\end{itemize}
 \item signal to others to initiate injection
 \item check the sensor readout during the tracer passage.  Make sure
   that:
@@ -593,17 +610,17 @@ Overview:
 \item Take it easy.
 \end{itemize}
 
-% Download WTW:
-% \begin{itemize}
-% \item switch datalogger on
-% \item insert USB-stick
-% \item long press ``Menu/Enter''
-% \item got to ``Data storage''
-% \item got to ``Automatic data storage''
-% \item got to ``Output to USB''
-% \item once finished it will return to the previous screen, remove USB
-%   stick.
-% \end{itemize}
+Download WTW:
+\begin{itemize}
+\item switch datalogger on
+\item insert USB-stick (this needs to be formatted to FAT16, or maybe FAT32)
+\item long press ``Menu/Enter''
+\item got to ``Data storage''
+\item got to ``Automatic data storage''
+\item got to ``Output to USB''
+\item once finished it will return to the previous screen, remove USB
+  stick.
+\end{itemize}
 
 Download and re-program Keller DCX22 CTD:
 \begin{itemize}
