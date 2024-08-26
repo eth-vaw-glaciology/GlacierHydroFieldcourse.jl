@@ -124,8 +124,11 @@ Cuts the time series into individual tracer experiments.
 function cut_sensor_readout(sensor_readout, tinj, tend)
 
     iinj = findfirst(sensor_readout[:t].>tinj)
-    iend = findfirst(sensor_readout[:t].>tend)-1
+    iend = findfirst(sensor_readout[:t].>tend)
     out = Dict()
+    if iinj===nothing || iend===nothing || iinj==iend
+        return out
+    end
     for (k,v) in sensor_readout
         if v isa Vector
             out[k] = v[iinj:iend]

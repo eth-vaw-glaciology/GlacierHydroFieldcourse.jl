@@ -8,7 +8,7 @@ solution_conc = 1.0 # calibration solution concentration (g/l)
 # Total calibration ml solution vs sensor readout (μS/cm) for each sensor
 # Example from 2021:
 
-calibrations = Dict(:s309=>[ ## sensor 309
+calibrations = Dict(309=>[ ## sensor 309
                              ## first calibration
                           [ 0 0.54 ## First row needs to be the background reading!
                             1 1.35
@@ -22,7 +22,7 @@ calibrations = Dict(:s309=>[ ## sensor 309
                             10 12.3
                             20 28.6 ],
                           ],
-                    :s145=>[## sensor 145
+                    145=>[## sensor 145
                             [ 0 0.31 ## First row needs to be the background reading!
                               1 1.03
                               5 4.29
@@ -33,8 +33,10 @@ calibrations = Dict(:s309=>[ ## sensor 309
                               5 5.88
                               10 11.83 ],
                             ],
+                    :wtw=>[[0 1.4
+                            1 2.7]],
                     ## add more:
-                    ##:s049=>[],
+                    ## 049=>[],
                     ##:s999=>[], ## etc
                     )
 
@@ -58,7 +60,7 @@ function ml_to_concentration(ml, solution_conc, bucketsize)
     return mass/bucketsize # concentration in g/l (== kg/m^3)
 end
 # An example, convert to concentration (g/l):
-ml_to_concentration(calibrations[:s309][1][:,1], solution_conc, bucketsize)
+ml_to_concentration(calibrations[309][1][:,1], solution_conc, bucketsize)
 
 # Now fit a linear function to it.  The function is pre-defined in the file helper_functions.jl with
 # name `fit_calibration`.

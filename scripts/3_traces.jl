@@ -11,27 +11,44 @@ pygui(false);
 # Now load data-files from CTD sensors
 
 ## for each sensor list all data-files
-fls = Dict(:s145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
+fls = Dict(145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
                    "../data/raw/example/205145-10mH2O_26_08_2021-08_30_00.CSV"],
-           :s309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
+           309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
                    "../data/raw/example/205309-100mH2O_26_08_2021-08_30_00.CSV"],
-           ## :s049=>[],
-           ## :s999
+           :wtw=> ["../data/raw/example-WTW/AD422041.CSV"]
+           ## :049=>[],
+           ## :999
            )
 
 ## Read sensor time series and concatenate the time series into one for each sensor
 sensor_readouts = Dict()
 for sens in keys(fls)
-    local out = read_Keller_DCX22_CTD(fls[sens][1])
-    for fl = fls[sens][2:end]
-        tmp = read_Keller_DCX22_CTD(fl)
-        for (k,v) in tmp
-            out[k] = [out[k]; tmp[k]]
+    if sens!=:wtw
+        local out = read_Keller_DCX22_CTD(fls[sens][1])
+        for fl = fls[sens][2:end]
+            tmp = read_Keller_DCX22_CTD(fl)
+            for (k,v) in tmp
+                out[k] = [out[k]; tmp[k]]
+            end
         end
+        sensor_readouts[sens] = out
+        ## add calibration function (from 2_calibration.jl)
+        sensor_readouts[sens][:cali_fn] = delta_cond2conc[sens]
+    else
+        local out = read_WTW(fls[sens][1])
+        for fl = fls[sens][2:end]
+            tmp = read_WTW(fl)
+            for (k,v) in tmp
+                out[k] = [out[k]; tmp[k]]
+            end
+        end
+        if year(out[:t][1])==2093 # wrong date in the example WTW file
+            out[:t] = out[:t] .- (out[:t][1] - DateTime("2021-08-24T08:15:00"))
+        end
+        sensor_readouts[sens] = out
+        ## add calibration function (from 2_calibration.jl)
+        sensor_readouts[sens][:cali_fn] = delta_cond2conc[sens]
     end
-    sensor_readouts[sens] = out
-    ## add calibration function (from 2_calibration.jl)
-    sensor_readouts[sens][:cali_fn] = delta_cond2conc[sens]
 end
 
 ## Plot concatenated conductivity time-series for all sensors
@@ -39,7 +56,7 @@ fig = figure()
 for sens in keys(sensor_readouts)
     plot(sensor_readouts[sens][:t], sensor_readouts[sens][:cond])
 end
-legend(keys(sensor_readouts))
+legend(string.(keys(sensor_readouts)))
 ylabel("Conductivity (μS/cm)")
 fig
 
@@ -53,6 +70,9 @@ fig
 # (add more sensors to the back if needed, or remove some if not needed)
 metafile = "../data/raw/example/tracer_metadata.csv"
 d,h = readdlm(metafile, ',', header=true)
+h = [hh isa AbstractString ? strip(hh) : hh for hh in h] # remove white-space for strings
+d = [dd isa AbstractString ? strip(dd) : dd for dd in d] # remove white-space for strings
+sensor_names = [tryparse(Int, hh)===nothing ? Symbol(hh) : parse(Int, hh) for hh in h[7:end]]
 
 # # Make the individual traces
 
@@ -60,13 +80,13 @@ d,h = readdlm(metafile, ',', header=true)
 A data-structure to hold data from one trace
 """
 struct Trace
-    nr
-    location
-    mass
-    tinj
-    tend
-    sensors
-    products
+    nr # id number of trace
+    location # where on the glacier
+    mass # injected salt mass [g]
+    tinj # injection as DateTime object
+    tend # end of trace (probably when back to background or when recording stopped)
+    sensors # record of each sensor 
+    products # this is where all the further processed stuff goes
 end
 
 ## Go through all meta-data lines (from the CSV-file) and creates a Tracer-experiment for it
@@ -77,10 +97,9 @@ for nr in 1:size(d,1)
     tend = Dates.Date(d[nr,3], DateFormat("dd.mm.yyyy")) + Dates.Time(d[nr,5], "HH:MM")
 
     ## figure out which sensors/loggers were used
-    local sensor_name = Symbol.("s".*h[7:end])
     sensors = Dict()
-    for snr in 1:length(sensor_name)
-        sens = sensor_name[snr]
+    for snr in 1:length(sensor_names)
+        local sens = sensor_names[snr]
         if !haskey(sensor_readouts, sens)
             @warn("No data for sensor $sens")
             continue

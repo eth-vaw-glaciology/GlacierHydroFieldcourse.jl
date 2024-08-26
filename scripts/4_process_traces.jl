@@ -28,6 +28,9 @@ Updates the trace in-place
 """
 function make_concentration!(tr, num=15)
     for (loc, v) in tr.sensors
+        if length(v)<2
+            continue
+        end
         tr.products[loc] = Dict()
         conc = v[:cali_fn](v[:cond])
         bkg = mean(conc[1:num])
@@ -71,7 +74,10 @@ Process one trace at each sensor location/for each sensor:
 """
 function process_trace!(tr)
     make_concentration!(tr)
-    for loc in keys(tr.sensors)
+    for (loc, v) in tr.sensors
+        if length(v)<2
+            continue
+        end
         ## calc discharge (m3/s)
         Q = tr.mass/1000/integrate_concentration(tr.sensors[loc][:tsec], tr.sensors[loc][:conc])
         tr.products[loc][:Q] = round(Q, sigdigits=2)

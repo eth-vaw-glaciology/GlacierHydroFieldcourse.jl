@@ -1,5 +1,5 @@
-Experiment No,Location,Date, Injection time, End time, Salt mass [g],145,049,309
-1,Lake,25.08.2021,11:10,11:20,2000,2,1,x
-2,UpperGlacier,25.08.2021,14:05,14:11,50,1,2,3
-4,Lake,26.08.2021,09:06,09:16,2000,2,x,1
-6,UpperGlacier,26.08.2021,13:25,13:35,50,3,2,1
+Experiment No, Location, Date,  Injection time,  End time,  Salt mass [g], 145, 309, wtw
+1, Lake, 25.08.2021, 11:10, 11:20, 2000, 2.1, 1, 2.2
+2, UpperGlacier, 25.08.2021, 14:05, 14:11, 50, 1.1, 2, 1.2
+4, Lake, 26.08.2021, 09:06, 09:16, 2000, 1, x, 2
+6, UpperGlacier, 26.08.2021, 13:25, 13:35, 50, 3, x, 1
