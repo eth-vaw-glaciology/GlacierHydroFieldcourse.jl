@@ -391,15 +391,16 @@ with the Kovacs to drill you a hole).
 
 The elevation difference is what drives the flow in a channel, and the
 friction is what hinders the flow.  This is captured in the
-Darcy-Weisbach relation $\Delta h = \frac{1}{2g} f v^2/D$ where $h$ is
+Darcy-Weisbach relation $\frac{\Delta h}{L} = \frac{1}{2g} f v^2/D$ where $h$ is
 elevation, $v$ speed, $D$ hydraulic diameter, $g$ gravitational
-acceleration, and $f$ a friction factor.  We want to get $f$, so we
+acceleration, $L$ is the flow path length (straight line and or actual flow path),
+and $f$ a friction factor.  We want to get $f$, so we
 need the rest:
 
 \begin{itemize}
-\item The time between detection of the salt peak at two different stations
-  divided by the flow path length gives the flow speed $v$.
-\item Flow speed divided by the discharge gives a mean cross sectional
+\item The flow path length between two stations divided
+by the time between detection of the salt peak gives the flow speed $v$.
+\item The discharge divided by the flow speed gives a mean cross sectional
   area $A$.
 \item The measured width and depth give an indication of the wetted
 perimeter P.  The hyd. diameter is then $D = 4A/P$.
@@ -408,7 +409,7 @@ detection points.  As the accuracy is about 10\,cm,
 make sure that you get enough elevation difference to get a good
 signal to noise ratio.  (For this you need to talk to one of the two
 groups with the RTK GPS).
-\item if you have enough time the RTK GPS, then you can measure the
+\item if you have enough time with the RTK GPS, then you can measure the
   flow path length more accurately with the RTK by making a track
   along all the channel's bends (i.e. you get the sinuosity then).
 \item take photographs covering the whole length of the test section,
