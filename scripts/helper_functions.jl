@@ -128,6 +128,8 @@ function cut_sensor_readout(sensor_readout, tinj, tend)
     out = Dict()
     if iinj===nothing || iend===nothing || iinj==iend
         return out
+    else
+        iend = iend - 1
     end
     for (k,v) in sensor_readout
         if v isa Vector

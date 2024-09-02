@@ -21,6 +21,7 @@ calibrations = Dict(309=>[ ## sensor 309
                             5 6.23
                             10 12.3
                             20 28.6 ],
+                            # etc.
                           ],
                     145=>[## sensor 145
                             [ 0 0.31 ## First row needs to be the background reading!
@@ -33,11 +34,12 @@ calibrations = Dict(309=>[ ## sensor 309
                               5 5.88
                               10 11.83 ],
                             ],
-                    :wtw=>[[0 1.4
+                    :wtw=>[ # note that sensors non-numeric ID are best written as a :symbol
+                           [0 1.4
                             1 2.7]],
                     ## add more:
                     ## 049=>[],
-                    ##:s999=>[], ## etc
+                    ## :someother=>[], ## etc
                     )
 
 # Convert ml solution added to concentration

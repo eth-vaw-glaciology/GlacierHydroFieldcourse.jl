@@ -22,11 +22,11 @@ using Statistics
     make_concentration!(tr, num=15)
 
 Calculate the concentration for a trace.  Assume that the first
-`num` (15 by default) values are background and use that as an average.
+`num` (3 by default) values are background and use that as an average.
 
 Updates the trace in-place
 """
-function make_concentration!(tr, num=15)
+function make_concentration!(tr, num=3)
     for (loc, v) in tr.sensors
         if length(v)<2
             continue
