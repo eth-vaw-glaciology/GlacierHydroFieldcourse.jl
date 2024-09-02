@@ -11,8 +11,8 @@
 
 # Load "3_traces.jl" (also loads 2_calibration.jl and helper_functions.jl)
 include("3_traces.jl")
-## set to true to get interactive plots, false for in-line plots
-pygui(false);
+## set to false to get interactive plots, false for in-line plots
+Makie.inline!(true)
 
 # Make the processing-function (see their doc-string for more info)
 

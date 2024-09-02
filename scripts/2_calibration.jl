@@ -21,7 +21,7 @@ calibrations = Dict(309=>[ ## sensor 309
                             5 6.23
                             10 12.3
                             20 28.6 ],
-                            # etc.
+                            ## etc.
                           ],
                     145=>[## sensor 145
                             [ 0 0.31 ## First row needs to be the background reading!
@@ -34,7 +34,7 @@ calibrations = Dict(309=>[ ## sensor 309
                               5 5.88
                               10 11.83 ],
                             ],
-                    :wtw=>[ # note that sensors non-numeric ID are best written as a :symbol
+                    :wtw=>[ ## note that sensors non-numeric ID are best written as a :symbol
                            [0 1.4
                             1 2.7]],
                     ## add more:
@@ -72,16 +72,17 @@ delta_cond2conc = Dict(a[1] => fit_calibration(bucketsize, solution_conc, a[2]..
 
 # Plot them
 
-using PyPlot
-
+using GLMakie
+Makie.inline!(true)
 ## Note if you want a zoom-able plot opening in a new window do:
-## `pygui(true)`
-## to go back to in-line plots do:
-pygui(false)
+## Makie.inline!(false)
+## to go back to in-line plots set it true again
 
-fig = figure()
+fig = Figure()
 for (i,sens) in enumerate(keys(delta_cond2conc))
-    subplot(length(delta_cond2conc), 1, i)
+    Axis(fig[i, 1], title="Sensor $sens",
+        xlabel="concentration (g/l)",
+        ylabel="Sensor readout change (μS/cm)")
     delta_fn = delta_cond2conc[sens]
     calis = calibrations[sens]
     ## scatter plots (x,y) points
@@ -89,24 +90,21 @@ for (i,sens) in enumerate(keys(delta_cond2conc))
     for cali in calis
         conc = ml_to_concentration(cali[:,1], solution_conc, bucketsize)
         maxreadout = max(maxreadout, maximum(cali[:,2].-cali[1,2]))
-        scatter(conc, cali[:,2].-cali[1,2],
-                label="Calibration 1")
+        scatter!(conc, cali[:,2].-cali[1,2],
+                 label="Calibration 1")
     end
-    xlabel("concentration (g/l)")
-    ylabel("Sensor readout change (μS/cm)")
 
     ## Now plot the line of best fit:
     readouts = 0:maxreadout
-    ## (plot plots a line)
-    plot(delta_fn(readouts), readouts, label="line of best fit")
-    title(sens)
+    ## (lines! plots a line)
+    lines!(delta_fn(readouts), readouts, label="line of best fit")
 end
-
-## mkpath("../plots")
-## savefig("../plots/calibration.png") # to save this figure to a file, useful for your presentation
-
-## return `fig` to show it in notebook
 fig
 
-#md savefig("../docs/calibration.png") #hide
+# Save them as files:
+
+## mkpath("../plots")
+## save("../plots/calibration.png", fig) ## to save this figure to a file, useful for your presentation
+
+#md save("../docs/calibration.png", fig) #hide
 #md # ![](calibration.png)

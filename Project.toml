@@ -2,8 +2,8 @@ name = "GlacierHydroFieldcourse"
 uuid = "a758561c-23e9-11ed-051c-4d3fdde944e1"
 
 [deps]
+GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
 IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
 Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
 LsqFit = "2fda8390-95c7-5789-9bda-21331edee243"
 NBInclude = "0db19996-df87-5ea3-a455-e3a50d440464"
-PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"

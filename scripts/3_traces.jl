@@ -5,8 +5,8 @@
 
 ## Load calibration script (also includes helper_functions.jl)
 include("2_calibration.jl")
-## set to true to get interactive plots, false for in-line plots
-pygui(false);
+## set to false to get interactive plots, false for in-line plots
+Makie.inline!(true)
 
 # Now load data-files from CTD sensors
 
@@ -52,15 +52,14 @@ for sens in keys(fls)
 end
 
 ## Plot concatenated conductivity time-series for all sensors
-fig = figure()
+fig = Figure(); Axis(fig[1,1], ylabel="Conductivity (μS/cm)")
 for sens in keys(sensor_readouts)
-    plot(sensor_readouts[sens][:t], sensor_readouts[sens][:cond])
+    lines!(sensor_readouts[sens][:t], sensor_readouts[sens][:cond],
+            label = sens)
 end
-legend(string.(keys(sensor_readouts)))
-ylabel("Conductivity (μS/cm)")
 fig
 
-#md savefig("../docs/cond-timeseries.png") #hide
+#md save(fig, "../docs/cond-timeseries.png") #hide
 #md # ![](cond-timeseries.png)
 
 # Read tracer metadata.  This CSV-file needs to have the format
@@ -130,19 +129,17 @@ Function to plot a tracer experiment, possibly consisting of
 several detectors.
 """
 function plot_trace(tr, field=:cond)
-    f = figure()
+    f = Figure(); Axis(f[1,1],
+            xlabel="Time since injection (s)",
+            ylabel=field==:cond ? "Conductivity (μS/cm)" : "")
     for (k,sens) in tr.sensors
-        plot(sens[:tsec], sens[field])
+        lines!(sens[:tsec], sens[field])
     end
-    if isempty(tr.products)
-        legend([v[:sensor_name] for (k,v) in tr.sensors])
-    else
-        legend(["$(v[:sensor_name]), loc=$k, Q=$(round(tr.products[k][:Q], sigdigits=2)) m³/s" for (k,v) in tr.sensors])
-    end
-    if field==:cond
-        ylabel("Conductivity (μS/cm)")
-    end
-    xlabel("Time since injection (s)")
+    ## if isempty(tr.products)
+    ##     legend([v[:sensor_name] for (k,v) in tr.sensors])
+    ## else
+    ##     legend(["$(v[:sensor_name]), loc=$k, Q=$(round(tr.products[k][:Q], sigdigits=2)) m³/s" for (k,v) in tr.sensors])
+    ## end
     return f
 end
 

@@ -6,20 +6,16 @@
 # Load helper_functions.jl and plotting package (`PyPlot`)
 
 include("helper_functions.jl")
-using PyPlot
-pygui(true) # to get an interactive, zoomable plot
-            ## (does not work when running a notebook on a server, only locally)
-## pygui(false) # to get in-line plots
-
+using GLMakie
+Makie.inline!(false) # set to false for notebook inline plots
 
 # Function which does the plotting
-
 """
-   plotit(filename, sensor, variable=:cond, ax=gca())
+   plotit(filename, sensor, variable=:cond)
 
 Plots the results from one file.  By default into the current axis
 """
-function plotit(filename, sensor, variable=:cond, ax=gca())
+function plotit(filename, sensor, variable=:cond)
     ## load
     d = if sensor==:CTD
         read_Keller_DCX22_CTD(filename)
@@ -33,8 +29,8 @@ function plotit(filename, sensor, variable=:cond, ax=gca())
         error("Don't know how to read data from sensor: $sensor")
     end
     ## plot
-    plot(d[:t], d[variable])
-    title("$filename, sensor=$sensor, variable=$variable")
+    lines(d[:t], d[variable])
+    ## title("$filename, sensor=$sensor, variable=$variable")
 end
 
 # Call above function to do the plotting.  Example plotting the pressure:
