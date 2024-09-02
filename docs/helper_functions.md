@@ -127,8 +127,13 @@ Cuts the time series into individual tracer experiments.
 function cut_sensor_readout(sensor_readout, tinj, tend)
 
     iinj = findfirst(sensor_readout[:t].>tinj)
-    iend = findfirst(sensor_readout[:t].>tend)-1
+    iend = findfirst(sensor_readout[:t].>tend)
     out = Dict()
+    if iinj===nothing || iend===nothing || iinj==iend
+        return out
+    else
+        iend = iend - 1
+    end
     for (k,v) in sensor_readout
         if v isa Vector
             out[k] = v[iinj:iend]
@@ -160,7 +165,7 @@ function read_WTW(filename)
         error("Filename $filename is not a file!")
     end
     if !startswith(splitdir(filename)[2], "AD")
-        warn("Read in a file starting with `AD`.  (The `AC` files use a comma for the decimal point.")
+        @warn("Read in a file starting with `AD`.  (The `AC` files use a comma for the decimal point.")
     end
     d, head = readdlm(filename, ';', header=true)
     out = Dict{Symbol,Any}() ## key has the be Symbol, value can be anything
@@ -187,7 +192,7 @@ end
 ````
 
 ````
-Main.var"##293".read_WTW
+Main.var"##225".read_WTW
 ````
 
 ---

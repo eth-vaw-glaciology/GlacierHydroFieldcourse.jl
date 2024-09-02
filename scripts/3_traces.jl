@@ -59,7 +59,7 @@ for sens in keys(sensor_readouts)
 end
 fig
 
-#md save(fig, "../docs/cond-timeseries.png") #hide
+#md save("../docs/cond-timeseries.png", fig) #hide
 #md # ![](cond-timeseries.png)
 
 # Read tracer metadata.  This CSV-file needs to have the format
@@ -144,7 +144,7 @@ function plot_trace(tr, field=:cond)
 end
 
 ## Example
-plot_trace(traces[2])
+f = plot_trace(traces[2])
 
-#md savefig("../docs/multi-trace.png") #hide
+#md save("../docs/multi-trace.png", f) #hide
 #md # ![](multi-trace.png)

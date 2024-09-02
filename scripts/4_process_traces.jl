@@ -96,8 +96,8 @@ end;
 for trace in traces
     process_trace!(trace)
 end
-plot_trace(traces[2], :conc)
-#md savefig("../docs/multi-trace-conc.png") #hide
+f = plot_trace(traces[2], :conc)
+#md save("../docs/multi-trace-conc.png", f) #hide
 #md # ![](multi-trace-conc.png)
 
 # Write output CSV

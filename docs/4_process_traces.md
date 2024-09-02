@@ -13,26 +13,12 @@ Load "3_traces.jl" (also loads 2_calibration.jl and helper_functions.jl)
 
 ````julia
 include("3_traces.jl")
-# set to true to get interactive plots, false for in-line plots
-pygui(false);
+# set to false to get interactive plots, false for in-line plots
+Makie.inline!(true)
 ````
 
 ````
-Estimated linear fit: f(delta_cond) = a*conc with
- a = 0.000812±9.9e-5
-
-Estimated linear fit: f(delta_cond) = a*conc with
- a = 0.00101±6.89e-5
-
-┌ Warning: No data for sensor s049
-└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##292 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-
+true
 ````
 
 Make the processing-function (see their doc-string for more info)
@@ -44,12 +30,15 @@ using Statistics
     make_concentration!(tr, num=15)
 
 Calculate the concentration for a trace.  Assume that the first
-`num` (15 by default) values are background and use that as an average.
+`num` (3 by default) values are background and use that as an average.
 
 Updates the trace in-place
 """
-function make_concentration!(tr, num=15)
+function make_concentration!(tr, num=3)
     for (loc, v) in tr.sensors
+        if length(v)<2
+            continue
+        end
         tr.products[loc] = Dict()
         conc = v[:cali_fn](v[:cond])
         bkg = mean(conc[1:num])
@@ -93,7 +82,10 @@ Process one trace at each sensor location/for each sensor:
 """
 function process_trace!(tr)
     make_concentration!(tr)
-    for loc in keys(tr.sensors)
+    for (loc, v) in tr.sensors
+        if length(v)<2
+            continue
+        end
         # calc discharge (m3/s)
         Q = tr.mass/1000/integrate_concentration(tr.sensors[loc][:tsec], tr.sensors[loc][:conc])
         tr.products[loc][:Q] = round(Q, sigdigits=2)
@@ -113,7 +105,7 @@ concentration:
 for trace in traces
     process_trace!(trace)
 end
-plot_trace(traces[2], :conc)
+f = plot_trace(traces[2], :conc)
 ````
 
 ![](multi-trace-conc.png)
@@ -128,7 +120,7 @@ function write_output(traces, fl)
 
         locdict = Dict(v[:sensor_name]=>k for (k,v) in tr.sensors)
         push!(out, [tr.nr, tr.location,  Dates.format(tr.tinj, "dd.mm.yyyy"), Dates.format(tr.tinj, "HH:MM:SS"),
-                    Dates.format(tr.tend, "dd.mm.yyyy"), tr.mass,
+                    Dates.format(tr.tend, "HH:MM:SS"), tr.mass,
                     get(locdict,:s145,"x"),
                     get(locdict,:s049,"x"),
                     get(locdict,:s309,"x"),

@@ -8,19 +8,14 @@ include("4_process_traces.jl") # load previous work
 
 ````
 Estimated linear fit: f(delta_cond) = a*conc with
+ a = 0.00101±6.89e-5
+
+Estimated linear fit: f(delta_cond) = a*conc with
  a = 0.000812±9.9e-5
 
 Estimated linear fit: f(delta_cond) = a*conc with
- a = 0.00101±6.89e-5
+ a = 0.000769±2.59e-15
 
-┌ Warning: No data for sensor s049
-└ @ Main.##293 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##293 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##293 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
-┌ Warning: No data for sensor s049
-└ @ Main.##293 ~/teaching/feldkurse-vaw/hydro/GlacierHydroFieldcourse.jl/scripts/3_traces.jl:85
 
 ````
 
