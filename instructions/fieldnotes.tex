@@ -242,66 +242,54 @@ time).  If not, consult the manual on how to set it.
 \subsubsection{Keller sensors}
 \label{s:press-trans}
 
-We'll employ a series of Keller sensors (the silver cylindrical ones)
+We'll employ a series of Keller sensors (the silver, cylindrical ones)
 to record: conductivity, lake-level, stream-level and air-pressure.
 
 \textbf{DCX-22} (pressure only), \textbf{DCX-22AA} (pressure of water
 and air) and \textbf{DCX-22 CTD} (with conductivity).  Configuration
 and download is with the field-laptop or your own if you install
-the ``Logger 5''
-program\\
-\url{https://download.keller-druck.com/api/download/rF8RVxQeojzuZmxZJ2ZtDF/en/latest.zip}.
+the ``PressureSuite Desktop''
+program
+\url{https://keller-pressure.com/?d=vNHsw8GWe3pFgCCe7Zifgk}.
 
 \begin{itemize}
   \item check/set time and date of computer (to an accuracy 1
     \emph{second}, as for the flow speed measurements with the CTD we
     need that accuracy.)
-  \item Open ``Logger 5''.  \textbf{Note:} be patient with the
-    program, sometimes it is rather slow.
-  \item plug in cable K-104A \& sensor to that cable
-  \item press ``F2'' (scan ports) and after waiting a bit click
-    ``Programming'' [maybe you have to click on ``Activate'', bottom right]
-\item For \emph{\bf pressure-only (DXC-22)} modify settings to
+  \item Open ``PressureSuite''.
+  \item plug in cable K-104A \& sensor to that cable (that may install some drivers)
+  \item once plugged in the sensor should appear as picture top left, click it
+  \item maybe click "Restart search for devices"
+  \item check battery. If below 60\% discuss with Mauro
+\item For \emph{\bf pressure-only (DXC-22)} modify settings to (by clicking "Edit" in the relevant sections)
   \begin{itemize}
-  \item Device memory: ``Linear''
-  \item Device clock: check box ``Adjust device clock...''
-  \item Start record: ``Certain time and date''
+  \item click "Device configuration"
+  \item Memory mode: ``Linear''
+  \item Channels: ``P1'', ``TOB1''
+  \item Start record: ``Start date/time''
     Time: 8:30, date: the next day
-\item Measure interval: 1 minute
-\item Channels: ``P1'', ``TOB1''
-\item Click ``Write configuration'' (click through warnings), wait
-  some time until it says ``Record prepared'' at the bottom
-\item These pressure transducer are for the lake should go into a casing to avoid
-it getting clogged by fine lake sediments.
+  \item Device clock: check box ``Synchronize time''
+  \item Click ``Write configuration''
+  \item Primary interval: 1 minute; secondary interval "Inactive"
+  \item Click ``Write configuration''
+  \item give it a few seconds and unplug (no disconnect sensor button is needed)
+  \item The pressure transducer for the lake should go into a casing to avoid it getting clogged by fine lake sediments.
 \end{itemize}
-\item For \emph{\bf dual pressure-sensor (DXC-22AA)} modify settings to
+\item For \emph{\bf dual pressure-sensor (DXC-22AA)} modify settings as above with exception
   \begin{itemize}
-  \item Device memory: ``Linear''
-  \item Device clock: check box ``Adjust device clock...''
-  \item Start record: ``Certain time and date''
-    Time: 8:30, date: the next day
-\item Measure interval: 1 minute (should give approx 16 days recording time)
 \item Channels: ``P1'', ``P2'', ``TOB1'', ``TOB2''
-\item Click ``Write configuration'' (click through warnings), wait
-  some time until it says ``Record prepared'' at the bottom
 \end{itemize}
-\item For \emph{\bf conductivity (DXC-22 CTD)} modify settings to
+\item For \emph{\bf conductivity (DXC-22 CTD)} as above except
   \begin{itemize}
-  \item Device memory: ``Linear''
-  \item Device clock: check box ``Adjust device clock...''
-  \item Start record: ``Certain time and date''
-    Time: 8:30, date: the next day
-\item Measure interval: 1 \textbf{second} (gives about 10.5h recording
-  with 3 channels)
 \item Channels: ``P1'', ``TOB1'', ``ConRaw''
-  \item Check: ``Measuring range'' is 0...200$\mu$S/cm (the
-    0...2000$\mu$S/cm shows a non-linear response and is thus hard to
+  \item Check: ``Conductivity range'' is 0...0.2mS/cm (the
+    0...2mS/cm shows a non-linear response and is thus hard to
     calibrate/use)
-\item Click ``Write configuration'' (click through warnings), wait
-  some time until progress-bar is done and it says ``Record prepared'' at the bottom
+\item Primary interval: 1 \textbf{second} (gives about 10.5h recording
+  with 3 channels)
 \end{itemize}
 
-\item Unplug sensor, close ``Logger 5''
+\item Unplug sensor, close ``PressureSuite''
 \end{itemize}
 
 
