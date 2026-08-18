@@ -8,18 +8,16 @@ VAW Glaciology Field Course: Glacier Hydrology
 - documentation (essentially the notebooks evaluated) is found in [`docs/`](docs), start with [`1_intro.md`](docs/1_intro.md).
 
 # Installation
+Install Julia with https://github.com/JuliaLang/juliaup
 
-## Linux
+--> If you don't want to install git, you can also download the code as a zip file from github.
 
-- install with your Linux-distribution package manager: `git`, `matplotlib`, `jupyter`
-- install Julia:
-  - download the binaries from https://julialang.org/downloads/
-  - unpack it with `tar xvvzf name-of-download.tar.gz` in a suitable
-    location
-  - make sure the `julia` executable is on your path, e.g. by setting
-    a sym-link to `~/.local/bin`
-- clone this repo: `git clone
-  git@github.com:eth-vaw-glaciology/GlacierHydroFieldcourse.jl.git`
+## Linux / Mac
+
+- install with your Linux-distribution package manager or homebrew: `git`, `jupyter`
+- open a terminal
+- clone this repo
+  - `git clone https://github.com/eth-vaw-glaciology/GlacierHydroFieldcourse.jl.git`
 - change dir `cd GlacierHydroFieldcourse.jl`
 - start Julia with current folder as project `julia --project`
 - at the Julia repl (terminal) execute:
@@ -28,11 +26,8 @@ VAW Glaciology Field Course: Glacier Hydrology
 
 ## Windows
 
-- install the Julia binaries from https://julialang.org/downloads/
-  (presumably the "64-bit (installer)")
 - install PowerShell via the Windows App-Store
   https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=fr-ch&gl=CH
-  (I think this is
 - install the git binaries from https://git-scm.com/download/win
   (presumably the 64-bit version)
   - the installer will ask you many questions.  Click "next" except
