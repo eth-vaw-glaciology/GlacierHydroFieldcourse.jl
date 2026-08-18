@@ -112,16 +112,19 @@ Steps:
 
 
 \subsection{Packing the material}
+
+\textbf{Make an inventory of all material you take.} This you give to Andreas before we leave. When we get back we'll check against that to make sure all material is back.
 \begin{itemize}
 \item Misc:
   \begin{itemize}
   \item several copies of these instructions
-  \item Puma-tape and string
+  \item Puma-tape and Duck-tape
+  \item Sturdy string, about 30m
   \item ETH-VAW stickers
   \item hand-held GPS / smart phone which displays coordinates
     (preferably Swiss system)
   \item Camera / smart phone
-  \item one radio (walky-talky)
+  \item one radio (walky-talky, handed out be Andreas)
   \item some small bottle of fluorescent dye (just for fun! 25g of SRB
     or Uranine are enough for a good color-display at the proglacial
     stream)
@@ -135,8 +138,8 @@ Steps:
   \begin{itemize}
   \item WTW conductivity probes, logger and cheat-sheet
   \item 2x Keller DCX22 CTD autonomous conductivity probe and logger
-  \item salt, pre-packaged (for first day 8kg for proglacial stream, a
-    few 100g in various package for the glacier streams)
+  \item salt, pre-packaged (at least for first day 3$\times$ 2kg for proglacial stream, a
+    few 100g in various package (20g, 100g, etc) for the glacier streams)
   \item 2x big bucket (10l) and stirring implement
   \item 1l measuring pot
   \item calibration solutions
@@ -227,11 +230,6 @@ fresh distilled water.
 
 Download the data from the CTD sensors.
 
-
-\subsection{Salt pre-packaging}
-\note{double check this is ok}
-
-Measure out zip-lock bags of 10x 10g, 10x 20g, 5x 50g, and 10x 2kg.
 
 \subsection{Sensors and data loggers}
 \subsubsection{WTW sensor}
@@ -620,19 +618,28 @@ Download WTW:
 Download and re-program Keller DCX22 CTD:
 \begin{itemize}
 \item start field-laptop in Windows
-\item open Logger 5.0 program
-\item connect DCX22-CTD and press F2 to scan for it
-\item click ``Read data'' and press ``F4''
-  (if it asks ``To set a mark'' click ``Yes'')
-\item now wait for a long long long long time (about 20min to
-  download it all).  Once done a window with a plot will open.
-\item There click ``Export'' (on the left), a new window opens:
-  \begin{itemize}
-  \item check ``UTF-8'', click ``CSV2''
-  \item export directory: ``Documents/Feldkurs\_Rhone/YEAR'' (create
-    in the Explorer if does not exist)
-  \item click ``Convert''
-  \end{itemize}
+\item open PressureSuite program
+\item connect DCX22-CTD, it should then pop up, otherwise "search"
+\item "Device configuration" and "Stop recording" (if it is still recording), go back
+\item "Read data" and wait for a long time\ldots 20min later it should have finished
+\item it now will display as "saved" and we want to export as CSV:
+\begin{itemize}
+\item "Display"
+\item "Export"
+\item choose "CSV"
+\end{itemize}
+% \item \textbf{TODO: update this section. Below is for Logger 5 still:} 
+% \item click ``Read data'' and press ``F4''
+%   (if it asks ``To set a mark'' click ``Yes'')
+% \item now wait for a long long long long time (about 20min to
+%   download it all).  Once done a window with a plot will open.
+% \item There click ``Export'' (on the left), a new window opens:
+%   \begin{itemize}
+%   \item check ``UTF-8'', click ``CSV2''
+%   \item export directory: ``Documents/Feldkurs\_Rhone/YEAR'' (create
+%     in the Explorer if does not exist)
+%   \item click ``Convert''
+%   \end{itemize}
 \item store data onto USB stick
 \item \textbf{re-program for the next day}, see Sec~\ref{s:cond-meters}; note
   down the starting time (suggested 8:30) in the fieldbook.

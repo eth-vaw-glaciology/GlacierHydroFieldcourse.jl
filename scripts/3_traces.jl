@@ -67,6 +67,13 @@ fig
 # `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
 #
 # (add more sensors to the back if needed, or remove some if not needed)
+#
+# Data description:
+# - Location -- where the trace was conducted, say "Lake"
+# - Injection time, End Time -- This will be used to crop the time series of the sensors
+# - 145, 049 etc -- This is a list of sensors. The value in the column is used to encode their location in the stream.
+#                   Suggestion is to use "1" for the upper location and "2" for the lower location. If two sensors are
+#                   at the same location use "2.1" and "2.2"
 metafile = "../data/raw/example/tracer_metadata.csv"
 d,h = readdlm(metafile, ',', header=true)
 h = [hh isa AbstractString ? strip(hh) : hh for hh in h] # remove white-space for strings
