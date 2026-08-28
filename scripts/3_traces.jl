@@ -11,10 +11,10 @@ Makie.inline!(true)
 # Now load data-files from CTD sensors
 
 ## for each sensor list all data-files
-fls = Dict(145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
-                   "../data/raw/example/205145-10mH2O_26_08_2021-08_30_00.CSV"],
-           309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
-                   "../data/raw/example/205309-100mH2O_26_08_2021-08_30_00.CSV"],
+fls = Dict(145=>["../data/raw/example/205145-300mH2O_2026-08-19.csv",
+                   "../data/raw/example/205145-300mH2O_2026-08-20.csv"],
+           309=>["../data/raw/example/205309-100mH2O_2026-08-19.csv",
+                   "../data/raw/example/205309-100mH2O_2026-08-20.csv"],
            :wtw=> ["../data/raw/example-WTW/AD422041.CSV"]
            ## :049=>[],
            ## :999
