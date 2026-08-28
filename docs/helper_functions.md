@@ -45,18 +45,25 @@ using DelimitedFiles: readdlm, writedlm ## Date time handling; CSV file handling
 const g = 9.81
 const rhow = 1000.0
 
-"""
-         read_Keller(filename;
-                     presshead="P1",
-                     condhead="ConRaw",
-                     temphead="TOB1",
-                     skipstart=8,
-                     )
+_parse_float(x) = x == "" ? NaN : x isa AbstractString ? parse(Float64, replace(x, "," => ".")) : Float64(x)
 
-Reads a Keller pressure/CTD sensor.  However, you probably want to use
-- `read_Keller_DCX22_CTD`,
-- `read_Keller_DCX22` and
-- `read_Keller_DC22`
+_round_to_second(t::DateTime) = round(t, Second)
+
+function _column_index(headers, needle)
+    i = findfirst(h -> occursin(needle, h), headers)
+    i === nothing && error("Could not find column matching '$needle'")
+    return i
+end
+
+"""
+         read_Keller_logger5(filename;
+                             presshead="P1",
+                             condhead="ConRaw",
+                             temphead="TOB1",
+                             skipstart=8,
+                             )
+
+Reads the old logger5 Keller pressure/CTD sensor format.
 
 Returns a dict with keys as appropriate:
 - :t [date-time stamp]
@@ -64,12 +71,12 @@ Returns a dict with keys as appropriate:
 - :temp [C]
 - :press [m H2O]
 """
-function read_Keller(filename;
-                     presshead="P1",
-                     condhead="ConRaw",
-                     temphead="TOB1",
-                     skipstart=8,
-                     )
+function read_Keller_logger5(filename;
+                             presshead="P1",
+                             condhead="ConRaw",
+                             temphead="TOB1",
+                             skipstart=8,
+                             )
     d,h = readdlm(filename, ';', skipstart=skipstart, header=true)
     h = h[:] ## h is a 1x2 matrix, change to a vector
 
@@ -78,16 +85,14 @@ function read_Keller(filename;
     id, it = findfirst(h.=="Date"), findfirst(h.=="Time")
     # time 12.08.2016 13:36:58
     fmtd, fmtt = "d/m/y", "H:M:S"
-    out[:t] = [Date(dd, fmtd) + Time(tt, fmtt) for (dd,tt) in zip(d[:,id], d[:,it])]
+    out[:t] = [_round_to_second(Date(dd, fmtd) + Time(tt, fmtt)) for (dd,tt) in zip(d[:,id], d[:,it])]
 
     for (head, key) in [(presshead, :press),
                         (condhead, :cond),
                         (temphead, :temp)]
         i = findfirst(h.==head) ## see if there is one
-        tmp = Float64[]
         if i!=nothing
-            out[key] = [s=="" ? missing :
-                        s isa AbstractString ? parse(Float64, replace(s, ","=>".")) : Float64(s) for s in d[:,i]]
+            out[key] = [_parse_float(s) for s in d[:,i]]
             # convert mS/cm to μS/cm
             if key==:cond
                 out[:cond] = out[:cond].*1000
@@ -99,25 +104,44 @@ function read_Keller(filename;
         end
     end
 
-    # check lengths and remove all "missing"
-    l = length(out[:t])
-    topurge = []
-    for v in values(out)
-        @assert length(v)==l
-        append!(topurge, findall(v.===missing))
-    end
-    topurge = sort(unique(topurge))
     for (k,v) in out
-        deleteat!(v, topurge)
-        if k!=:t
-            out[k] = Float64.(v) ## make the vector an
+        if k != :t
+            out[k] = Float64.(v)
         end
     end
     return out
 end
 
+function read_Keller(filename)
+    if !isfile(filename)
+        error("Filename $filename is not a file!")
+    end
+    firstline = open(filename, "r") do io
+        readline(io)
+    end
+    if occursin("Serial Number", firstline)
+        return read_Keller_logger5(filename)
+    end
+
+    d,h = readdlm(filename, ';', header=true)
+    h = h[:]
+
+    out = Dict{Symbol,Any}()
+    it = _column_index(h, "Datetime [local time]")
+    id = _column_index(h, "P1 [bar]")
+    ic = _column_index(h, "Conductivity raw")
+    itemp = _column_index(h, "TOB1 [°C]")
+
+    out[:t] = [_round_to_second(DateTime(replace(split(s, ",")[1], "T" => " "), "y-m-d H:M:S") + Millisecond(length(split(s, ",")) > 1 ? parse(Int, lpad(split(s, ",")[2], 3, '0')) : 0)) for s in d[:,it]]
+    out[:press] = [_parse_float(s) for s in d[:,id]] .* 1e5 / g / rhow
+    out[:temp] = [_parse_float(s) for s in d[:,itemp]]
+    out[:cond] = [_parse_float(s) for s in d[:,ic]] .* 1000
+    return out
+end
+
 read_Keller_DCX22_CTD(filename) = read_Keller(filename)
-read_Keller_DCX22(filename) = read_Keller(filename, error("Not implement yet"))
+read_Keller_DCX22(filename) = read_Keller(filename)
+read_Keller_DC22(filename) = read_Keller(filename)
 
 """
     cut_sensor_readout(sensor_readout, tinj, tend)
@@ -127,12 +151,10 @@ Cuts the time series into individual tracer experiments.
 function cut_sensor_readout(sensor_readout, tinj, tend)
 
     iinj = findfirst(sensor_readout[:t].>tinj)
-    iend = findfirst(sensor_readout[:t].>tend)
+    iend = findlast(sensor_readout[:t].<tend)
     out = Dict()
     if iinj===nothing || iend===nothing || iinj==iend
         return out
-    else
-        iend = iend - 1
     end
     for (k,v) in sensor_readout
         if v isa Vector
@@ -192,7 +214,7 @@ end
 ````
 
 ````
-Main.var"##225".read_WTW
+Main.var"##277".read_WTW
 ````
 
 ---

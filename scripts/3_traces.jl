@@ -151,7 +151,7 @@ function plot_trace(tr, field=:cond)
 end
 
 ## Example
-f = plot_trace(traces[2])
+f = plot_trace(traces[4])
 
 #md save("../docs/multi-trace.png", f) #hide
 #md # ![](multi-trace.png)

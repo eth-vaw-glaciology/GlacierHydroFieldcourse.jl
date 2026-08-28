@@ -18,10 +18,10 @@ Now load data-files from CTD sensors
 
 ````julia
 # for each sensor list all data-files
-fls = Dict(145=>["../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV",
-                   "../data/raw/example/205145-10mH2O_26_08_2021-08_30_00.CSV"],
-           309=>["../data/raw/example/205309-100mH2O_25_08_2021-09_00_00.CSV",
-                   "../data/raw/example/205309-100mH2O_26_08_2021-08_30_00.CSV"],
+fls = Dict(145=>["../data/raw/example/205145-300mH2O_2026-08-19.csv",
+                   "../data/raw/example/205145-300mH2O_2026-08-20.csv"],
+           309=>["../data/raw/example/205309-100mH2O_2026-08-19.csv",
+                   "../data/raw/example/205309-100mH2O_2026-08-20.csv"],
            :wtw=> ["../data/raw/example-WTW/AD422041.CSV"]
            # :049=>[],
            # :999
@@ -75,6 +75,13 @@ Read tracer metadata.  This CSV-file needs to have the format
 `Experiment No,Location,Date, Injection time, End time, Salt mass [g], 145, 049, 309`
 
 (add more sensors to the back if needed, or remove some if not needed)
+
+Data description:
+- Location -- where the trace was conducted, say "Lake"
+- Injection time, End Time -- This will be used to crop the time series of the sensors
+- 145, 049 etc -- This is a list of sensors. The value in the column is used to encode their location in the stream.
+                  Suggestion is to use "1" for the upper location and "2" for the lower location. If two sensors are
+                  at the same location use "2.1" and "2.2"
 
 ````julia
 metafile = "../data/raw/example/tracer_metadata.csv"
@@ -163,7 +170,7 @@ function plot_trace(tr, field=:cond)
 end
 
 # Example
-f = plot_trace(traces[2])
+f = plot_trace(traces[4])
 
 ````
 

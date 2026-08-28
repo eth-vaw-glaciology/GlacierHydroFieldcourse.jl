@@ -42,7 +42,7 @@ using DelimitedFiles: readdlm, writedlm ## Date time handling; CSV file handling
 const g = 9.81
 const rhow = 1000.0
 
-_parse_float(x) = x == "" ? missing : x isa AbstractString ? parse(Float64, replace(x, "," => ".")) : Float64(x)
+_parse_float(x) = x == "" ? NaN : x isa AbstractString ? parse(Float64, replace(x, "," => ".")) : Float64(x)
 
 _round_to_second(t::DateTime) = round(t, Second)
 
@@ -101,18 +101,9 @@ function read_Keller_logger5(filename;
         end
     end
 
-    ## check lengths and remove all "missing"
-    l = length(out[:t])
-    topurge = []
-    for v in values(out)
-        @assert length(v)==l
-        append!(topurge, findall(v.===missing))
-    end
-    topurge = sort(unique(topurge))
     for (k,v) in out
-        deleteat!(v, topurge)
-        if k!=:t
-            out[k] = Float64.(v) ## make the vector an
+        if k != :t
+            out[k] = Float64.(v)
         end
     end
     return out
@@ -157,12 +148,10 @@ Cuts the time series into individual tracer experiments.
 function cut_sensor_readout(sensor_readout, tinj, tend)
 
     iinj = findfirst(sensor_readout[:t].>tinj)
-    iend = findfirst(sensor_readout[:t].>tend)
+    iend = findlast(sensor_readout[:t].<tend)
     out = Dict()
     if iinj===nothing || iend===nothing || iinj==iend
         return out
-    else
-        iend = iend - 1
     end
     for (k,v) in sensor_readout
         if v isa Vector

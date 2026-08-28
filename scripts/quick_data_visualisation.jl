@@ -34,5 +34,5 @@ function plotit(filename, sensor, variable=:cond)
 end
 
 # Call above function to do the plotting.  Example plotting the pressure:
-plotit("../data/raw/example/205145-10mH2O_25_08_2021-09_00_00.CSV", :CTD, :press)
+plotit("../data/raw/example/205145-300mH2O_2026-08-20.csv", :CTD, :press)
 plotit("../data/raw/example-WTW/AD422041.CSV", :WTW, :cond)
